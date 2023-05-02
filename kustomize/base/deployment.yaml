@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fint-utdanning-larling-adapter
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      restartPolicy: Always
+      containers:
+        - image: fintlabs/fint-utdanning-larling-adapter
+          name: fint-utdanning-larling-adapter
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+            requests:
+              memory: "1Gi"
+              cpu: "250m"
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: fint-utdanning-larling-adapter
+            - secretRef:
+                name: fint-utdanning-larling-adapter-pg
+            - secretRef:
+                name: fint-utdanning-larling-adapter

@@ -1,1 +1,1 @@
-# fint-utdanning-larning-adapter
+# Utdanning Lærling Adapter
