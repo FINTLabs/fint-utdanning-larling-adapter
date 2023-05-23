@@ -4,3 +4,4 @@ metadata:
   name: fint-utdanning-larling-adapter
 data:
   fint.fylkesnr: '54'
+  fint.adapter.base-url: 'https://beta.felleskomponent.no'
