@@ -2,11 +2,15 @@ package no.fintlabs.person;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import no.fint.model.felles.Person;
+import no.fint.model.felles.Virksomhet;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.felles.kompleksedatatyper.Kontaktinformasjon;
 import no.fint.model.felles.kompleksedatatyper.Periode;
 import no.fint.model.felles.kompleksedatatyper.Personnavn;
+import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.PersonResource;
+import no.fint.model.utdanning.larling.Larling;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
@@ -60,6 +64,10 @@ public class PersonService {
         kontaktinformasjon.setEpostadresse(contract.getElev().getEpost());
         kontaktinformasjon.setMobiltelefonnummer(contract.getElev().getMobilNummer());
         personResource.setKontaktinformasjon(kontaktinformasjon);
+
+        personResource.addLink("person", Link.with(Larling.class, "systemid", contract.getElev().getSystemId()));
+        personResource.addLink("virksomhet", Link.with(Virksomhet.class, "systemid", contract.getBedriftsNummer()));
+        personResource.addSelf(Link.with(Person.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
 
         return personResource;
     }

@@ -1,9 +1,12 @@
 package no.fintlabs.virksomhet;
 
 import lombok.SneakyThrows;
+import no.fint.model.felles.Virksomhet;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.felles.kompleksedatatyper.Periode;
+import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.VirksomhetResource;
+import no.fint.model.utdanning.larling.Larling;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
@@ -48,6 +51,9 @@ public class VirksomhetService {
 
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
+
+        virksomhetResource.addLink("larling", Link.with(Larling.class, "systemid", contract.getElev().getSystemId()));
+        virksomhetResource.addSelf(Link.with(Virksomhet.class, "bedriftsnummer", contract.getBedriftsNummer()));
 
         return virksomhetResource;
     }
