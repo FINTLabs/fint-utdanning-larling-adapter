@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: fint-utdanning-larling-adapter
 data:
-  TZ: 'Europe/Oslo'
-  JAVA_TOOLS_OPTIONS: '-XX:+ExitOnOutOfMemoryError -Xmx256M'
+  fint.fylkesnr: '3'
