@@ -1,7 +1,7 @@
-package no.fintlabs.larling;
+package no.fintlabs.virksomhet;
 
 import lombok.extern.slf4j.Slf4j;
-import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.fint.model.resource.felles.VirksomhetResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourcePublisher;
 import no.fintlabs.adapter.datasync.ResourceRepository;
@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
-
 @Slf4j
 @Service
-public class LarlingPublisher extends ResourcePublisher<LarlingResource, ResourceRepository<LarlingResource>> {
+public class VirksomhetPublisher extends ResourcePublisher<VirksomhetResource, ResourceRepository<VirksomhetResource>> {
 
-    public LarlingPublisher(LarlingRepository repository, AdapterProperties adapterProperties) {
+    public VirksomhetPublisher(VirksomhetRepository repository, AdapterProperties adapterProperties) {
         super(repository, adapterProperties);
     }
 
@@ -32,11 +31,12 @@ public class LarlingPublisher extends ResourcePublisher<LarlingResource, Resourc
     // Not in use
     @Override
     public void doDeltaSync() {
+        log.info("Start delta sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPatchData(repository.getUpdatedResources()));
     }
 
     @Override
     protected AdapterCapability getCapability() {
-        return adapterProperties.getCapabilityByResource("larling");
+        return adapterProperties.getCapabilityByResource("virksomhet");
     }
 }

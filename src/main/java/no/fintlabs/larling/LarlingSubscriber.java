@@ -1,6 +1,5 @@
 package no.fintlabs.larling;
 
-import lombok.extern.slf4j.Slf4j;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourceSubscriber;
@@ -10,7 +9,6 @@ import no.fintlabs.adapter.validator.ValidatorService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@Slf4j
 @Service
 public class LarlingSubscriber extends ResourceSubscriber<LarlingResource, LarlingPublisher> {
 

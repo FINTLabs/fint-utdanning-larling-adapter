@@ -1,7 +1,7 @@
-package no.fintlabs.larling;
+package no.fintlabs.person;
 
 import lombok.extern.slf4j.Slf4j;
-import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.fint.model.resource.felles.PersonResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourcePublisher;
 import no.fintlabs.adapter.datasync.ResourceRepository;
@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
-
 @Slf4j
 @Service
-public class LarlingPublisher extends ResourcePublisher<LarlingResource, ResourceRepository<LarlingResource>> {
+public class PersonPublisher extends ResourcePublisher<PersonResource, ResourceRepository<PersonResource>> {
 
-    public LarlingPublisher(LarlingRepository repository, AdapterProperties adapterProperties) {
+    public PersonPublisher(PersonRepository repository, AdapterProperties adapterProperties) {
         super(repository, adapterProperties);
     }
 
@@ -37,6 +36,6 @@ public class LarlingPublisher extends ResourcePublisher<LarlingResource, Resourc
 
     @Override
     protected AdapterCapability getCapability() {
-        return adapterProperties.getCapabilityByResource("larling");
+        return adapterProperties.getCapabilityByResource("person");
     }
 }
