@@ -34,7 +34,7 @@ jobs:
         run: |
           ./gradlew build
           mkdir data
-          cp ./build/libs/fint-utdanning-larling-adapter-*.jar ./data/app.jar
+          cp ./build/libs/${GITHUB_REPOSITORY#*/}-*.jar ./data/app.jar
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
