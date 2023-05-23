@@ -20,7 +20,7 @@ public class RestUtil {
     @Value("${fint.api-key}")
     private String apiKey;
 
-    @Value("${fint.uri}")
+    @Value("${fint.uri:https://www.vigo.no/vigows/rest/laktiv}")
     private String uri;
 
     public RestUtil(WebClient.Builder webClientBuilder) {
