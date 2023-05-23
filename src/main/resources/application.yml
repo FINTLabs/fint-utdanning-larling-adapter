@@ -1,9 +1,9 @@
 fint:
   adapter:
-    id: https://vigoiks.no/fintlabs-no/utdanning/vurdering
+    id: https://vigoiks.no/fintlabs-no/utdanning/larling
     password:
     username:
-    base-url: https://alpha.felleskomponent.no
+    base-url: https://beta.felleskomponent.no
     registration-id: fint
     org-id: fintlabs.no
     heartbeat-interval: 1
@@ -15,14 +15,14 @@ fint:
         fullSyncIntervalInDays: 1
         deltaSyncInterval: IMMEDIATE
       person:
-        domain-name: felles
-        packageName:
+        domain-name: utdanning
+        packageName: larling
         resource-name: person
         fullSyncIntervalInDays: 1
         deltaSyncInterval: IMMEDIATE
       virksomhet:
-        domain-name: felles
-        packageName:
+        domain-name: utdanning
+        packageName: larling
         resource-name: virksomhet
         fullSyncIntervalInDays: 1
         deltaSyncInterval: IMMEDIATE
