@@ -10,7 +10,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-        - image: fintlabs/fint-utdanning-larling-adapter
+        - image: ghcr.io/fintlabs/fint-utdanning-larling-adapter:sha-0000000
           name: fint-utdanning-larling-adapter
           resources:
             limits:
