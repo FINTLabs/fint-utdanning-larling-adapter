@@ -13,6 +13,7 @@ import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.utdanning.larling.Larling;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
+import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -33,12 +34,15 @@ public class PersonService {
 
     public List<PersonResource> getPersonResources() {
         List<PersonResource> personResources = new ArrayList<>();
-        restUtil.getRequestData()
-                .subscribe(requestData ->
-                        requestData.getKontrakter().forEach(contract -> {
-                            PersonResource personResource = createPersonResource(contract);
-                            personResources.add(personResource);
-                        }));
+        RequestData requestData = restUtil.getRequestData().block();
+
+        if (requestData != null) {
+            requestData.getKontrakter().forEach(contract -> {
+                PersonResource personResource = createPersonResource(contract);
+                personResources.add(personResource);
+            });
+        }
+
         return personResources;
     }
 

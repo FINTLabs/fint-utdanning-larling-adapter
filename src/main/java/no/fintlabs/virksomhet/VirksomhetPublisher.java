@@ -10,8 +10,6 @@ import no.fintlabs.adapter.models.AdapterCapability;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
 @Slf4j
 @Service
 public class VirksomhetPublisher extends ResourcePublisher<VirksomhetResource, ResourceRepository<VirksomhetResource>> {
@@ -21,8 +19,7 @@ public class VirksomhetPublisher extends ResourcePublisher<VirksomhetResource, R
     }
 
     @Override
-    @Scheduled(initialDelayString = "1000000", fixedRateString = "500000")
-    @PostConstruct
+    @Scheduled(initialDelayString = "1000", fixedRateString = "500000")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));
