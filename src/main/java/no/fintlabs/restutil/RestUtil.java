@@ -20,9 +20,12 @@ public class RestUtil {
     @Value("${fint.api-key}")
     private String apiKey;
 
+    @Value("${fint.uri}")
+    private String uri;
+
     public RestUtil(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
-                .baseUrl("https://www.vigo.no/vigows/rest/laktiv")
+                .baseUrl(uri)
                 .codecs(this::configureCodecs)
                 .build();
     }
