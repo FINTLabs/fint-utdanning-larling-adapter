@@ -1,5 +1,6 @@
 package no.fintlabs.restutil;
 
+import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
+
+@Slf4j
 @Service
 public class RestUtil {
 
@@ -20,12 +24,9 @@ public class RestUtil {
     @Value("${fint.api-key}")
     private String apiKey;
 
-    @Value("${fint.uri:https://www.vigo.no/vigows/rest/laktiv}")
-    private String uri;
-
     public RestUtil(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
-                .baseUrl(uri)
+                .baseUrl("https://www.vigo.no/vigows/rest/laktiv")
                 .codecs(this::configureCodecs)
                 .build();
     }
