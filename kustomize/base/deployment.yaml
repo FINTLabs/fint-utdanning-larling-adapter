@@ -25,6 +25,4 @@ spec:
             - configMapRef:
                 name: fint-utdanning-larling-adapter
             - secretRef:
-                name: fint-utdanning-larling-adapter-pg
-            - secretRef:
                 name: fint-utdanning-larling-adapter

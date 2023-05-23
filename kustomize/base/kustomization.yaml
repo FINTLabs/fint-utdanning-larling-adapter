@@ -4,4 +4,3 @@ resources:
   - one-password.yaml
   - config-map.yaml
   - deployment.yaml
-  - postgres.yaml
