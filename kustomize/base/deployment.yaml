@@ -14,11 +14,11 @@ spec:
           name: fint-utdanning-larling-adapter
           resources:
             limits:
-              memory: "2Gi"
-              cpu: "2"
-            requests:
-              memory: "1Gi"
+              memory: "256Mi"
               cpu: "250m"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
           ports:
             - containerPort: 8080
           envFrom:
