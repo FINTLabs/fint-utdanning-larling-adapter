@@ -39,7 +39,7 @@ public class RestUtil {
         return webClient.get()
                 .header("api-key", apiKey)
                 .header("fylkesnr", orgNumber)
-                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .header("Accept", "application/json")
                 .retrieve()
                 .bodyToMono(RequestData.class);
     }
