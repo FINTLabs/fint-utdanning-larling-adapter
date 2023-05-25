@@ -1,4 +1,4 @@
-package no.fintlabs.person;
+package no.fintlabs.model.person;
 
 import no.fint.model.resource.felles.PersonResource;
 import no.fintlabs.adapter.config.AdapterProperties;

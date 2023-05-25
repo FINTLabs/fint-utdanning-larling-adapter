@@ -1,4 +1,4 @@
-package no.fintlabs.virksomhet;
+package no.fintlabs.model.virksomhet;
 
 import no.fint.model.resource.felles.VirksomhetResource;
 import no.fintlabs.adapter.config.AdapterProperties;

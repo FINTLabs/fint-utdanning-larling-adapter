@@ -1,4 +1,4 @@
-package no.fintlabs.larling;
+package no.fintlabs.model.larling;
 
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.adapter.config.AdapterProperties;
