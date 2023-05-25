@@ -8,6 +8,7 @@ import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.felles.kompleksedatatyper.Periode;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.fint.model.resource.utdanning.utdanningsprogram.ProgramomrademedlemskapResource;
 import no.fint.model.utdanning.larling.Larling;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
@@ -55,12 +56,12 @@ public class LarlingService {
         larlingResource.setLaretid(periode);
 
         Identifikator identifikator = new Identifikator();
-        identifikator.setGyldighetsperiode(periode);
         identifikator.setIdentifikatorverdi(contract.getElev().getSystemId());
         larlingResource.setSystemId(identifikator);
 
         larlingResource.addLink("person", Link.with(Person.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
         larlingResource.addLink("virksomhet", Link.with(Virksomhet.class, "bedriftsnummer", contract.getBedriftsNummer()));
+        larlingResource.addLink("programomrademedlemskap", Link.with(ProgramomrademedlemskapResource.class, "systemid", contract.getElev().getSystemId()));
         larlingResource.addSelf(Link.with(Larling.class, "systemid", contract.getElev().getSystemId()));
 
         return larlingResource;
