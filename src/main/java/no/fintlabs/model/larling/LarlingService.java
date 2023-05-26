@@ -8,6 +8,7 @@ import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.resource.felles.VirksomhetResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.fint.model.resource.utdanning.utdanningsprogram.ProgramomradeResource;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
 import no.fintlabs.restutil.model.RequestData;
@@ -62,7 +63,7 @@ public class LarlingService {
 
         larlingResource.addLink("person", Link.with(PersonResource.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
         larlingResource.addLink("virksomhet", Link.with(VirksomhetResource.class, "systemid", contract.getBedriftsNummer()));
-        // Add Programområde link
+        larlingResource.addLink("programomrade", Link.with(ProgramomradeResource.class, "systemid", contract.getProgramKode()));
         larlingResource.addSelf(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
 
         return larlingResource;
