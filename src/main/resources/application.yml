@@ -1,8 +1,8 @@
 fint:
   adapter:
     id: https://vigoiks.no/fintlabs-no/utdanning/larling
-    password:
-    username:
+    password: ${fint.core.oauth2.username}
+    username: ${fint.core.oauth2.password}
     base-url: https://beta.felleskomponent.no
     registration-id: fint
     org-id: fintlabs.no
@@ -37,7 +37,7 @@ spring:
         registration:
           fint:
             authorization-grant-type: password
-            client-id:
-            client-secret:
+            client-id: ${fint.core.oauth2.client-id}
+            client-secret: ${fint.core.oauth2.client-secret}
             provider: fint-idp
             scope: fint-adapter
