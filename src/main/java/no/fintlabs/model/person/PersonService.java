@@ -67,8 +67,6 @@ public class PersonService {
         personResource.setKontaktinformasjon(kontaktinformasjon);
 
         personResource.addLink("larling", Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
-        // Hvordan får vi tak i otungdom id?
-//        personResource.addLink("otungdom", Link.with(OTUngdomResource.class, "systemid", contract.getElev().getSystemId()));
         personResource.addSelf(Link.with(Person.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
 
         return personResource;
