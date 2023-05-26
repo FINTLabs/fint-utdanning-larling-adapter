@@ -47,7 +47,6 @@ public class VirksomhetService {
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
-        // Hvordan kan vi legge til flere larlinger uten å cache og mye styr?
         virksomhetResource.addLink("larling", Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
         virksomhetResource.addSelf(Link.with(VirksomhetResource.class, "systemid", contract.getBedriftsNummer()));
 
