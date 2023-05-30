@@ -7,8 +7,8 @@ patchesStrategicMerge:
   - config-map.yaml
   - fint-client.yaml
 commonLabels:
-  app.kubernetes.io/name: fint-core-consumer-utdanning-kodeverk
-  app.kubernetes.io/instance: fint-core-consumer-utdanning-kodeverk_tffk-no
+  app.kubernetes.io/name: fint-utdanning-larling-adapter
+  app.kubernetes.io/instance: fint-utdanning-larling-adapter_tffk-no
   app.kubernetes.io/version: latest
   app.kubernetes.io/component: backend
   app.kubernetes.io/part-of: fint-core
