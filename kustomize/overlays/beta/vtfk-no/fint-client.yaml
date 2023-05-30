@@ -1,19 +1,19 @@
 apiVersion: fintlabs.no/v1alpha1
-kind: FintAdapter
+kind: FintClient
 metadata:
   name: fint-utdanning-larling-adapter
-  namespace: mrfylke-no
+  namespace: vtfk-no
   labels:
     app.kubernetes.io/name: fint-utdanning-larling-adapter
-    app.kubernetes.io/instance: fint-utdanning-larling-adapter_mrfylke-no
+    app.kubernetes.io/instance: fint-utdanning-larling-adapter_vtfk-no
     app.kubernetes.io/version: latest
     app.kubernetes.io/component: adapter
     app.kubernetes.io/part-of: fint-core
     fintlabs.no/team: core
-    fintlabs.no/org-id: mrfylke.no
+    fintlabs.no/org-id: vtfk.no
 
 spec:
-  orgId: mrfylke.no
+  orgId: vtfk.no
   note: Leverer Larling resources til provider
   components:
     - utdanning_larling

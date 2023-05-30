@@ -1,5 +1,5 @@
 apiVersion: fintlabs.no/v1alpha1
-kind: FintAdapter
+kind: FintClient
 metadata:
   name: fint-utdanning-larling-adapter
   namespace: tffk-no

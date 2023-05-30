@@ -1,19 +1,19 @@
 apiVersion: fintlabs.no/v1alpha1
-kind: FintAdapter
+kind: FintClient
 metadata:
   name: fint-utdanning-larling-adapter
-  namespace: viken-no
+  namespace: ude-oslo-kommune-no
   labels:
     app.kubernetes.io/name: fint-utdanning-larling-adapter
-    app.kubernetes.io/instance: fint-utdanning-larling-adapter_viken-no
+    app.kubernetes.io/instance: fint-utdanning-larling-adapter_ude-oslo-kommune-no
     app.kubernetes.io/version: latest
     app.kubernetes.io/component: adapter
     app.kubernetes.io/part-of: fint-core
     fintlabs.no/team: core
-    fintlabs.no/org-id: viken.no
+    fintlabs.no/org-id: ude.oslo.kommune.no
 
 spec:
-  orgId: viken.no
+  orgId: ude.oslo.kommune.no
   note: Leverer Larling resources til provider
   components:
     - utdanning_larling

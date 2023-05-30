@@ -5,7 +5,7 @@ resources:
   - ../../../base
 patchesStrategicMerge:
   - config-map.yaml
-  - one-password.yaml
+  - fint-client.yaml
 commonLabels:
   app.kubernetes.io/name: fint-core-consumer-utdanning-kodeverk
   app.kubernetes.io/instance: fint-core-consumer-utdanning-kodeverk_viken-no
