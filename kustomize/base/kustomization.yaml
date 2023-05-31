@@ -4,3 +4,4 @@ resources:
   - one-password.yaml
   - config-map.yaml
   - deployment.yaml
+  - fint-client.yaml

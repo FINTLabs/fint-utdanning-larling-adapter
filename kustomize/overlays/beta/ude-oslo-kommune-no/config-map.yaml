@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: fint-utdanning-larling-adapter
-data:
-  fint.fylkesnr: '3'
-  fint.adapter.base-url: 'https://beta.felleskomponent.no'
