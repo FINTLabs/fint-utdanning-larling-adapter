@@ -23,4 +23,4 @@ patches:
         value: "trondelagfylke.no"
     target:
       kind: FintAdapter
-      name: fint-utdanning-larling-adapter
+      name: fint-utdanning-larling-adapter-credentials
