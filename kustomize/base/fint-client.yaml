@@ -1,7 +1,7 @@
 apiVersion: fintlabs.no/v1alpha1
 kind: FintAdapter
 metadata:
-  name: fint-utdanning-larling-adapter-credentials
+  name: fint-utdanning-larling-cred
   namespace: org-dash
   labels:
     app.kubernetes.io/name: fint-utdanning-larling-adapter
