@@ -22,5 +22,5 @@ patches:
         path: "/spec/orgId"
         value: "trondelagfylke.no"
     target:
-      kind: FintClient
+      kind: FintAdapter
       name: fint-utdanning-larling-adapter
