@@ -13,7 +13,20 @@ commonLabels:
   fintlabs.no/org-id: trondelagfylke.no
 
 patches:
-  - path: config-map.yaml
+  - patch: |-
+      - op: replace
+        path: "/metadata/labels/app.kubernetes.io~1instance"
+        value: "fint-utdanning-larling-adapter_trondelagfylke_no"
+      - op: replace
+        path: "/spec/orgId"
+        value: "trondelagfylke.no"
+      - op: replace
+        path: "/spec/env/1/value"
+        value: "https://beta.felleskomponent.no"
+    target:
+      kind: Application
+      name: fint-utdanning-larling-adapter
+
   - patch: |-
       - op: replace
         path: "/metadata/labels/app.kubernetes.io~1instance"
@@ -23,4 +36,4 @@ patches:
         value: "trondelagfylke.no"
     target:
       kind: FintClient
-      name: utdanning-larling-cred
+      name: fint-utdanning-larling-adapter-cred

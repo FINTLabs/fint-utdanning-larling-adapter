@@ -1,0 +1,44 @@
+apiVersion: fintlabs.no/v1alpha1
+kind: Application
+metadata:
+  name: fint-utdanning-larling-adapter
+  namespace: fintlabs-no
+  labels:
+    app.kubernetes.io/name: fint-utdanning-larling-adapter
+    app.kubernetes.io/instance: fint-utdanning-larling-adapter_fintlabs_no
+    app.kubernetes.io/version: latest
+    app.kubernetes.io/component: adapter
+    app.kubernetes.io/part-of: fint-core
+    fintlabs.no/team: core
+    fintlabs.no/org-id: fintlabs.no
+spec:
+  port: 8080
+  imagePullPolicy: Always
+  orgId: fintlabs.no
+  image: ghcr.io/fintlabs/fint-utdanning-larling-adapter:sha-0000000
+  env:
+    - name: JAVA_TOOL_OPTIONS
+      value: '-XX:+ExitOnOutOfMemoryError -Xmx256M'
+    - name: fint.fylkesnr
+      value: nummer
+    - name: fint.adapter.base-url
+      value: 'https://beta.felleskomponent.no'
+  envFrom:
+    - secretRef:
+        name: fint-utdanning-larling-adapter
+    - secretRef:
+        name: fint-utdanning-larling-adapter-cred
+  onePassword:
+    itemPath: "vaults/aks-beta-vault/items/fint-utdanning-larling-adapter"
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "250m"
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+  restartPolicy: Always
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }

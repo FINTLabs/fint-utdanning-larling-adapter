@@ -1,7 +1,7 @@
 apiVersion: fintlabs.no/v1alpha1
 kind: FintClient
 metadata:
-  name: utdanning-larling-cred
+  name: fint-utdanning-larling-adapter-cred
   namespace: org-dash
   labels:
     app.kubernetes.io/name: fint-utdanning-larling-adapter
@@ -13,5 +13,6 @@ metadata:
     fintlabs.no/org-id: org-dot
 spec:
   orgId: org-dot
+  note: Sender lærling data til FINT API
   components:
     - utdanning_larling
