@@ -27,4 +27,4 @@ spec:
             - secretRef:
                 name: fint-utdanning-larling-adapter
             - secretRef:
-                 name: fint-utdanning-larling-cred
+                 name: utdanning-larling-cred
