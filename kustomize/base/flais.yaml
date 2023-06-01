@@ -25,7 +25,7 @@ spec:
       value: 'https://beta.felleskomponent.no'
   envFrom:
     - secretRef:
-        name: fint-utdanning-larling-adapter
+        name: fint-utdanning-larling-adapter-op
     - secretRef:
         name: fint-utdanning-larling-adapter-cred
   onePassword:
