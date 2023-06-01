@@ -22,6 +22,9 @@ patches:
         value: "trondelagfylke.no"
       - op: replace
         path: "/spec/env/1/value"
+        value: "50"
+      - op: replace
+        path: "/spec/env/2/value"
         value: "https://beta.felleskomponent.no"
     target:
       kind: Application
