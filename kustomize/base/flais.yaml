@@ -27,7 +27,7 @@ spec:
     - secretRef:
         name: fint-utdanning-larling-adapter-op
     - secretRef:
-        name: fint-utdanning-larling-adapter-credentials
+        name: larling-adapter-cred
   onePassword:
     itemPath: "vaults/aks-beta-vault/items/fint-utdanning-larling-adapter"
   resources:
