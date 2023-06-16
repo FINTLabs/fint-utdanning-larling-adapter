@@ -1,43 +1,9 @@
-fint:
-  adapter:
-    id: https://vigoiks.no/fintlabs-no/utdanning/larling
-    password: ${fint.core.oauth2.username}
-    username: ${fint.core.oauth2.password}
-    base-url: https://beta.felleskomponent.no
-    registration-id: fint
-    org-id: fintlabs.no
-    heartbeat-interval: 1
-    capabilities:
-      larling:
-        domain-name: utdanning
-        packageName: larling
-        resource-name: larling
-        fullSyncIntervalInDays: 1
-        deltaSyncInterval: IMMEDIATE
-      person:
-        domain-name: utdanning
-        packageName: larling
-        resource-name: person
-        fullSyncIntervalInDays: 1
-        deltaSyncInterval: IMMEDIATE
-      virksomhet:
-        domain-name: utdanning
-        packageName: larling
-        resource-name: virksomhet
-        fullSyncIntervalInDays: 1
-        deltaSyncInterval: IMMEDIATE
-
 spring:
-  security:
-    oauth2:
-      client:
-        provider:
-          fint-idp:
-            token-uri: https://idp.felleskomponent.no/nidp/oauth/nam/token?resourceServer=fint-api
-        registration:
-          fint:
-            authorization-grant-type: password
-            client-id: ${fint.core.oauth2.client-id}
-            client-secret: ${fint.core.oauth2.client-secret}
-            provider: fint-idp
-            scope: fint-adapter
+  profiles:
+    include:
+      - adapter
+      - oauth
+
+logging:
+  level:
+    no.fintlabs: DEBUG

@@ -1,0 +1,26 @@
+fint:
+  adapter:
+    id: https://vigoiks.no/fintlabs-no/utdanning/larling
+    base-url: https://beta.felleskomponent.no
+    registration-id: fint
+    org-id: fintlabs.no
+    heartbeat-interval: 1
+    capabilities:
+      larling:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: larling
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
+      person:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: person
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
+      virksomhet:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: virksomhet
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
