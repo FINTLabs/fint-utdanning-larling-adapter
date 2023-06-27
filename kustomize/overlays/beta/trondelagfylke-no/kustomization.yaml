@@ -26,6 +26,9 @@ patches:
       - op: replace
         path: "/spec/env/2/value"
         value: "https://beta.felleskomponent.no"
+      - op: replace
+        path: "/spec/env/3/value"
+        value: "trondelagfylke.no"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter

@@ -23,6 +23,8 @@ spec:
       value: nummer
     - name: fint.adapter.base-url
       value: 'https://beta.felleskomponent.no'
+    - name: fint.adapter.org-id
+      value: 'org-dot'
   envFrom:
     - secretRef:
         name: fint-utdanning-larling-adapter-op
