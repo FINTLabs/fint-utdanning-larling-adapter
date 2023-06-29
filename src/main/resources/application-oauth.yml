@@ -1,7 +1,7 @@
 fint:
   adapter:
-    username: ${fint.core.oauth2.password}
-    password: ${fint.core.oauth2.username}
+    username: ${fint.core.oauth2.username}
+    password: ${fint.core.oauth2.password}
 
 spring:
   security:
