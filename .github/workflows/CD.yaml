@@ -63,7 +63,7 @@ jobs:
 #          - mrfylke-no
 #          - vtfk-no
           - trondelagfylke-no
-#          - nfk-no
+          - nfk-no
 #          - tffk-no
         cluster:
 #          - aks-alpha-fint-2021-11-18
