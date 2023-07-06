@@ -47,7 +47,7 @@ public class VirksomhetService {
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
-        virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
+        virksomhetResource.addLarling(Link.with(LarlingResource.class, "utdanning/larling/larling/systemid", contract.getElev().getSystemId()));
         virksomhetResource.addSelf(Link.with(VirksomhetResource.class, "systemid", contract.getBedriftsNummer()));
 
         return virksomhetResource;
