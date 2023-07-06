@@ -61,7 +61,7 @@ public class LarlingService {
         identifikator.setIdentifikatorverdi(contract.getElev().getSystemId());
         larlingResource.setSystemId(identifikator);
 
-        larlingResource.addPerson(Link.with(PersonResource.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
+        larlingResource.addPerson(Link.with(PersonResource.class, "utdanning/larling/person/fodselsnummer", contract.getElev().getFodselsNummer()));
         larlingResource.addBedrift(Link.with(VirksomhetResource.class, "systemid", contract.getBedriftsNummer()));
         larlingResource.addProgramomrade(Link.with(ProgramomradeResource.class, "systemid", contract.getProgramKode()));
         larlingResource.addSelf(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
