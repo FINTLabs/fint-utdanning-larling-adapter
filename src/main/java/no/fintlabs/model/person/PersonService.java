@@ -67,7 +67,7 @@ public class PersonService {
         personResource.setKontaktinformasjon(kontaktinformasjon);
 
         personResource.addLarling(Link.with(LarlingResource.class, "utdanning/larling/larling/systemid", contract.getElev().getSystemId()));
-        personResource.addSelf(Link.with(Person.class, "systemid", contract.getElev().getFodselsNummer()));
+        personResource.addSelf(Link.with(Person.class, "utdanning/larling/person/fodselsnummer", contract.getElev().getFodselsNummer()));
 
         return personResource;
     }
