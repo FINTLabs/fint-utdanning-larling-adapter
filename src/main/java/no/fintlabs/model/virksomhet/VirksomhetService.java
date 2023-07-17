@@ -6,41 +6,54 @@ import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.VirksomhetResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
-import no.fintlabs.restutil.RestUtil;
+import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VirksomhetService {
 
-    private final RestUtil restUtil;
+    private final CacheService cacheService;
 
-    public VirksomhetService(RestUtil restUtil) {
-        this.restUtil = restUtil;
+    public VirksomhetService(CacheService cacheService) {
+        this.cacheService = cacheService;
     }
 
     public List<VirksomhetResource> getVirksomhetResources() {
-        List<VirksomhetResource> virksomhetResources = new ArrayList<>();
-        RequestData requestData = restUtil.getRequestData().block();
+        try {
+            RequestData requestData = cacheService.get();
 
-        if (requestData != null) {
-            requestData.getKontrakter().forEach(contract -> {
-                VirksomhetResource virksomhetResource = createVirksomhetResource(contract);
-                virksomhetResources.add(virksomhetResource);
-            });
+            List<VirksomhetResource> virksomhetResources = requestData.getKontrakter().stream()
+                    .map(contract -> createVirksomhetResource(contract, requestData.getKontrakter()))
+                    .collect(Collectors.toList());
+
+            cacheService.finishProcess();
+
+            return virksomhetResources;
+        } catch (Exception exception) {
+            cacheService.handleProcessingError();
+            throw exception;
         }
+    }
 
-        return virksomhetResources;
+    private void addLarlingLinks(VirksomhetResource virksomhetResource, String bedriftsNummer, List<Contract> contracts) {
+        contracts.forEach(contract -> {
+            if (contract.getBedriftsNummer().equals(bedriftsNummer)) {
+                virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
+            }
+        });
     }
 
     @SneakyThrows
-    private VirksomhetResource createVirksomhetResource(Contract contract) {
+    private VirksomhetResource createVirksomhetResource(Contract contract, List<Contract> contractList) {
         VirksomhetResource virksomhetResource = new VirksomhetResource();
+        String bedriftsNummer = contract.getBedriftsNummer();
+
         if (!contract.getBedriftsNavn().isEmpty())
             virksomhetResource.setOrganisasjonsnavn(contract.getBedriftsNavn());
 
@@ -48,8 +61,8 @@ public class VirksomhetService {
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
-        virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
-        virksomhetResource.addLink("self", Link.with(Person.class, "utdanning/larling/virksomhet/virksomhetsid", contract.getBedriftsNummer()));
+        addLarlingLinks(virksomhetResource, bedriftsNummer, contractList);
+        virksomhetResource.addLink("self", Link.with(Person.class, "utdanning/larling/virksomhet/virksomhetsid", bedriftsNummer));
 
         return virksomhetResource;
     }

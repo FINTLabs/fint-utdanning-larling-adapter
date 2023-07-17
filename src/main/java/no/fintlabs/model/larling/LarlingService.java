@@ -9,39 +9,42 @@ import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.resource.felles.VirksomhetResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fint.model.resource.utdanning.utdanningsprogram.ProgramomradeResource;
-import no.fintlabs.restutil.RestUtil;
+import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class LarlingService {
 
-    private final RestUtil restUtil;
+    private final CacheService cacheService;
     private final SimpleDateFormat dateFormat;
 
-    public LarlingService(RestUtil restUtil) {
-        this.restUtil = restUtil;
+    public LarlingService(CacheService cacheService) {
+        this.cacheService = cacheService;
         this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     public List<LarlingResource> getLarlingResources() {
-        List<LarlingResource> larlingResources = new ArrayList<>();
-        RequestData requestData = restUtil.getRequestData().block();
+        try {
+            RequestData requestData = cacheService.get();
 
-        if (requestData != null) {
-            requestData.getKontrakter().forEach(contract -> {
-                LarlingResource larlingResource = createLarlingResource(contract);
-                larlingResources.add(larlingResource);
-            });
+            List<LarlingResource> larlingResources = requestData.getKontrakter().stream()
+                    .map(this::createLarlingResource)
+                    .collect(Collectors.toList());
+
+            cacheService.finishProcess();
+
+            return larlingResources;
+        } catch (Exception exception) {
+            cacheService.handleProcessingError();
+            throw exception;
         }
-
-        return larlingResources;
     }
 
     @SneakyThrows

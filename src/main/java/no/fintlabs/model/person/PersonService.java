@@ -9,39 +9,42 @@ import no.fint.model.felles.kompleksedatatyper.Personnavn;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
-import no.fintlabs.restutil.RestUtil;
+import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class PersonService {
 
-    private final RestUtil restUtil;
+    private final CacheService cacheService;
     private final SimpleDateFormat dateFormat;
 
-    public PersonService(RestUtil restUtil) {
-        this.restUtil = restUtil;
+    public PersonService(CacheService cacheService) {
+        this.cacheService = cacheService;
         this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     public List<PersonResource> getPersonResources() {
-        List<PersonResource> personResources = new ArrayList<>();
-        RequestData requestData = restUtil.getRequestData().block();
+        try {
+            RequestData requestData = cacheService.get();
 
-        if (requestData != null) {
-            requestData.getKontrakter().forEach(contract -> {
-                PersonResource personResource = createPersonResource(contract);
-                personResources.add(personResource);
-            });
+            List<PersonResource> personResources = requestData.getKontrakter().stream()
+                    .map(this::createPersonResource)
+                    .collect(Collectors.toList());
+
+            cacheService.finishProcess();
+
+            return personResources;
+        } catch (Exception exception) {
+            cacheService.handleProcessingError();
+            throw exception;
         }
-
-        return personResources;
     }
 
     @SneakyThrows

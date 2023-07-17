@@ -35,13 +35,14 @@ public class RestUtil {
         configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024); // 10 MB buffer size
     }
 
-    public Mono<RequestData> getRequestData() {
+    public RequestData getRequestData() {
         return webClient.get()
                 .header("api-key", apiKey)
                 .header("fylkesnr", orgNumber)
                 .header("Accept", "application/json")
                 .retrieve()
-                .bodyToMono(RequestData.class);
+                .bodyToMono(RequestData.class)
+                .block();
     }
 
 }
