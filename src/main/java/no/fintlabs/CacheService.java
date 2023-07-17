@@ -1,12 +1,14 @@
 package no.fintlabs;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CacheService {
@@ -38,6 +40,7 @@ public class CacheService {
     }
 
     private void clearCache() {
+        log.debug("Clearing Cache...");
         requestData = null;
         processCount.set(0);
     }
