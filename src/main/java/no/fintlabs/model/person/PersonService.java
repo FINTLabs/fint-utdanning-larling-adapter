@@ -55,7 +55,7 @@ public class PersonService {
         personResource.setFodselsnummer(identifikator);
 
         Personnavn personnavn = new Personnavn();
-        personnavn.setEtternavn(contract.getElev().getFornavn());
+        personnavn.setFornavn(contract.getElev().getFornavn());
         personnavn.setEtternavn(contract.getElev().getEtternavn());
         personResource.setNavn(personnavn);
 

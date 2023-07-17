@@ -1,6 +1,7 @@
 package no.fintlabs.model.virksomhet;
 
 import lombok.SneakyThrows;
+import no.fint.model.felles.Person;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.VirksomhetResource;
@@ -47,8 +48,8 @@ public class VirksomhetService {
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
-        virksomhetResource.addLarling(Link.with(LarlingResource.class, "utdanning/larling/larling/systemid", contract.getElev().getSystemId()));
-        virksomhetResource.addSelf(Link.with(VirksomhetResource.class, "utdanning/larling/virksomhet/virksomhetsid", contract.getBedriftsNummer()));
+        virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
+        virksomhetResource.addLink("self", Link.with(Person.class, "utdanning/larling/virksomhet/virksomhetsid", contract.getBedriftsNummer()));
 
         return virksomhetResource;
     }
