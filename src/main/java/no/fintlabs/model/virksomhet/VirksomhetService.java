@@ -62,7 +62,7 @@ public class VirksomhetService {
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
         addLarlingLinks(virksomhetResource, bedriftsNummer, contractList);
-        virksomhetResource.addLink("self", Link.with(Person.class, "utdanning/larling/virksomhet/virksomhetsid", bedriftsNummer));
+        virksomhetResource.addSelf(Link.with(VirksomhetResource.class, "virksomhetsid", contract.getBedriftsNummer()));
 
         return virksomhetResource;
     }

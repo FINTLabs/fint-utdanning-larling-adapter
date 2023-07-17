@@ -46,6 +46,7 @@ public class CacheService {
     }
 
     private void fillCache() {
+        log.debug("Filling Cache...");
         requestData = restUtil.getRequestData();
     }
 

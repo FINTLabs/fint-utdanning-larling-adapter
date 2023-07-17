@@ -2,7 +2,6 @@ package no.fintlabs.model.person;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import no.fint.model.felles.Person;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.felles.kompleksedatatyper.Kontaktinformasjon;
 import no.fint.model.felles.kompleksedatatyper.Personnavn;
@@ -70,7 +69,7 @@ public class PersonService {
         personResource.setKontaktinformasjon(kontaktinformasjon);
 
         personResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
-        personResource.addLink("self", Link.with(Person.class, "utdanning/larling/person/fodselsnummer", contract.getElev().getFodselsNummer()));
+        personResource.addSelf(Link.with(PersonResource.class, "utdanning/larling/person/fodselsnummer", contract.getElev().getFodselsNummer()));
 
         return personResource;
     }
