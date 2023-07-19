@@ -10,7 +10,6 @@ import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
-import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -31,9 +30,7 @@ public class PersonService {
 
     public List<PersonResource> getPersonResources() {
         try {
-            RequestData requestData = cacheService.get();
-
-            List<PersonResource> personResources = requestData.getKontrakter().stream()
+            List<PersonResource> personResources = cacheService.getContracts().stream()
                     .map(this::createPersonResource)
                     .collect(Collectors.toList());
 

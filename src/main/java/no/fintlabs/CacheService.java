@@ -1,15 +1,18 @@
 package no.fintlabs;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.restutil.RestUtil;
-import no.fintlabs.restutil.model.RequestData;
+import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class CacheService {
 
@@ -17,7 +20,12 @@ public class CacheService {
 
     private final RestUtil restUtil;
     private final AtomicInteger processCount = new AtomicInteger(0);
-    private RequestData requestData;
+    private final Map<String, List<Contract>> cache;
+
+    public CacheService(RestUtil restUtil) {
+        this.restUtil = restUtil;
+        this.cache = new HashMap<>();
+    }
 
     public void finishProcess() {
         int currentCount = processCount.incrementAndGet();
@@ -26,13 +34,19 @@ public class CacheService {
         }
     }
 
-    public RequestData get() {
+    public List<Contract> getContracts(String bedriftsNummer) {
+        return cache.containsKey(bedriftsNummer) ? cache.get(bedriftsNummer) : new ArrayList<>();
+    }
+
+    public List<Contract> getContracts() {
         synchronized (this) {
-            if (requestData == null) {
+            if (cache.isEmpty()) {
                 fillCache();
             }
         }
-        return requestData;
+        return cache.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     public void handleProcessingError() {
@@ -41,13 +55,19 @@ public class CacheService {
 
     private void clearCache() {
         log.debug("Clearing Cache...");
-        requestData = null;
+        cache.clear();
         processCount.set(0);
     }
 
     private void fillCache() {
         log.debug("Filling Cache...");
-        requestData = restUtil.getRequestData();
+        restUtil.getRequestData()
+                .getKontrakter()
+                .forEach(this::addToCache);
+    }
+
+    private void addToCache(Contract contract) {
+        cache.computeIfAbsent(contract.getBedriftsNummer(), key -> new ArrayList<>()).add(contract);
     }
 
 }

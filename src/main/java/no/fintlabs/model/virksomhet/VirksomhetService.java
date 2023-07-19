@@ -1,17 +1,14 @@
 package no.fintlabs.model.virksomhet;
 
 import lombok.SneakyThrows;
-import no.fint.model.felles.Person;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
 import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.VirksomhetResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
-import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +23,9 @@ public class VirksomhetService {
 
     public List<VirksomhetResource> getVirksomhetResources() {
         try {
-            RequestData requestData = cacheService.get();
 
-            List<VirksomhetResource> virksomhetResources = requestData.getKontrakter().stream()
-                    .map(contract -> createVirksomhetResource(contract, requestData.getKontrakter()))
+            List<VirksomhetResource> virksomhetResources = cacheService.getContracts().stream()
+                    .map(this::createVirksomhetResource)
                     .collect(Collectors.toList());
 
             cacheService.finishProcess();
@@ -41,16 +37,15 @@ public class VirksomhetService {
         }
     }
 
-    private void addLarlingLinks(VirksomhetResource virksomhetResource, String bedriftsNummer, List<Contract> contracts) {
-        contracts.forEach(contract -> {
-            if (contract.getBedriftsNummer().equals(bedriftsNummer)) {
-                virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
-            }
-        });
+    private void addLarlingLinks(VirksomhetResource virksomhetResource, String bedriftsNummer) {
+        cacheService.getContracts(bedriftsNummer).forEach(contract ->
+                virksomhetResource.addLarling(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()))
+        );
+
     }
 
     @SneakyThrows
-    private VirksomhetResource createVirksomhetResource(Contract contract, List<Contract> contractList) {
+    private VirksomhetResource createVirksomhetResource(Contract contract) {
         VirksomhetResource virksomhetResource = new VirksomhetResource();
         String bedriftsNummer = contract.getBedriftsNummer();
 
@@ -61,7 +56,7 @@ public class VirksomhetService {
         bedriftIdentifikator.setIdentifikatorverdi(contract.getBedriftsNummer());
         virksomhetResource.setVirksomhetsId(bedriftIdentifikator);
 
-        addLarlingLinks(virksomhetResource, bedriftsNummer, contractList);
+        addLarlingLinks(virksomhetResource, bedriftsNummer);
         virksomhetResource.addSelf(Link.with(VirksomhetResource.class, "virksomhetsid", contract.getBedriftsNummer()));
 
         return virksomhetResource;

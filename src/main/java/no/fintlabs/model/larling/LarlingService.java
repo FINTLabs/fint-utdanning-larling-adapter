@@ -11,7 +11,6 @@ import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fint.model.resource.utdanning.utdanningsprogram.ProgramomradeResource;
 import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
-import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -32,9 +31,7 @@ public class LarlingService {
 
     public List<LarlingResource> getLarlingResources() {
         try {
-            RequestData requestData = cacheService.get();
-
-            List<LarlingResource> larlingResources = requestData.getKontrakter().stream()
+            List<LarlingResource> larlingResources = cacheService.getContracts().stream()
                     .map(this::createLarlingResource)
                     .collect(Collectors.toList());
 
