@@ -63,10 +63,15 @@ public class LarlingService {
 
         larlingResource.addPerson(Link.with(PersonResource.class, "fodselsnummer", contract.getElev().getFodselsNummer()));
         larlingResource.addBedrift(Link.with(VirksomhetResource.class, "virksomhetsid", contract.getBedriftsNummer()));
-        larlingResource.addProgramomrade(Link.with(ProgramomradeResource.class, "utdanning/utdanningsprogram/programomrade/systemid", contract.getProgramKode()));
+        larlingResource.addProgramomrade(Link.with(ProgramomradeResource.class, "utdanning/utdanningsprogram/programomrade/systemid", setProgramKode(contract.getProgramKode())));
         larlingResource.addSelf(Link.with(LarlingResource.class, "systemid", contract.getElev().getSystemId()));
 
         return larlingResource;
+    }
+
+    // This is a temporray fix until IST sends the correct programKode in the API
+    private String setProgramKode(String programKode) {
+        return programKode + "-".repeat(Math.max(0, 10 - programKode.length()));
     }
 
 }
