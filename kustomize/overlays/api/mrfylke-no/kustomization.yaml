@@ -1,0 +1,48 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: mrfylke-no
+resources:
+  - ../../../base
+commonLabels:
+  app.kubernetes.io/name: fint-utdanning-larling-adapter
+  app.kubernetes.io/instance: fint-utdanning-larling-adapter_mrfylke_no
+  app.kubernetes.io/version: latest
+  app.kubernetes.io/component: adapter
+  app.kubernetes.io/part-of: fint-core
+  fintlabs.no/team: core
+  fintlabs.no/org-id: mrfylke.no
+
+patches:
+  - patch: |-
+      - op: replace
+        path: "/metadata/labels/app.kubernetes.io~1instance"
+        value: "fint-utdanning-larling-adapter_mrfylke_no"
+      - op: replace
+        path: "/spec/orgId"
+        value: "mrfylke.no"
+      - op: replace
+        path: "/spec/env/1/value"
+        value: "15"
+      - op: replace
+        path: "/spec/env/2/value"
+        value: "https://api.felleskomponent.no"
+      - op: replace
+        path: "/spec/env/3/value"
+        value: "mrfylke.no"
+      - op: replace
+        path: "/spec/onePassword/itemPath"
+        value: "vaults/aks-api-vault/items/fint-utdanning-larling-adapter"
+    target:
+      kind: Application
+      name: fint-utdanning-larling-adapter
+
+  - patch: |-
+      - op: replace
+        path: "/metadata/labels/app.kubernetes.io~1instance"
+        value: "fint-utdanning-larling-adapter_mrfylke_no"
+      - op: replace
+        path: "/spec/orgId"
+        value: "mrfylke.no"
+    target:
+      kind: FintAdapter
+      name: utdanning-larling-adapter
