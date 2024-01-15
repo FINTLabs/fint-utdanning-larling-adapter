@@ -59,6 +59,7 @@ jobs:
           - vestfoldfylke-no
           - telemarkfylke-no
           - mrfylke-no
+          - rogfk-no
         cluster:
 #          - aks-alpha-fint-2021-11-18
           - aks-beta-fint-2021-11-23
@@ -66,6 +67,8 @@ jobs:
 #          - aks-pwf-fint-2021-10-20
         exclude:
           - org: trondelagfylke-no
+            cluster: aks-api-fint-2022-02-08
+          - org: rogfk-no
             cluster: aks-api-fint-2022-02-08
           - org: tffk-no
             cluster: aks-api-fint-2022-02-08
