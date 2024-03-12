@@ -20,7 +20,7 @@ public class LarlingPublisher extends ResourcePublisher<LarlingResource, Resourc
     }
 
     @Override
-    @Scheduled(initialDelayString = "1000", fixedRateString = "7200000")
+    @Scheduled(initialDelayString = "1000", fixedRateString = "86400000")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));
