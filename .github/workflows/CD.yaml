@@ -65,6 +65,13 @@ jobs:
           - aks-beta-fint-2021-11-23
           - aks-api-fint-2022-02-08
 #          - aks-pwf-fint-2021-10-20
+        exclude:
+          - org: trondelagfylke-no
+            cluster: aks-api-fint-2022-02-08
+          - org: rogfk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: tffk-no
+            cluster: aks-api-fint-2022-02-08
 
     steps:
       - name: Checkout repository
