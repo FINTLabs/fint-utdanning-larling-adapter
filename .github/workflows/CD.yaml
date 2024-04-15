@@ -60,6 +60,14 @@ jobs:
           - telemarkfylke-no
           - mrfylke-no
           - rogfk-no
+          - afk-no
+          - agderfk-no
+          - bfk-no
+          - ffk-no
+          - innlandetfylke-no
+          - ofk-no
+          - ude-oslo-kommune-no
+          - vlfk-no
         cluster:
 #          - aks-alpha-fint-2021-11-18
           - aks-beta-fint-2021-11-23
@@ -71,6 +79,22 @@ jobs:
           - org: rogfk-no
             cluster: aks-api-fint-2022-02-08
           - org: tffk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: afk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: agderfk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: bfk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: ffk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: innlandetfylke-no
+            cluster: aks-api-fint-2022-02-08
+          - org: ofk-no
+            cluster: aks-api-fint-2022-02-08
+          - org: ude-oslo-kommune-no
+            cluster: aks-api-fint-2022-02-08
+          - org: vlfk-no
             cluster: aks-api-fint-2022-02-08
 
     steps:

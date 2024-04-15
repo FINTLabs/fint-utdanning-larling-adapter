@@ -1,0 +1,45 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ffk-no
+resources:
+  - ../../../base
+commonLabels:
+  app.kubernetes.io/name: fint-utdanning-larling-adapter
+  app.kubernetes.io/instance: fint-utdanning-larling-adapter_ffk_no
+  app.kubernetes.io/version: latest
+  app.kubernetes.io/component: adapter
+  app.kubernetes.io/part-of: fint-core
+  fintlabs.no/team: core
+  fintlabs.no/org-id: ffk.no
+
+patches:
+  - patch: |-
+      - op: replace
+        path: "/metadata/labels/app.kubernetes.io~1instance"
+        value: "fint-utdanning-larling-adapter_ffk_no"
+      - op: replace
+        path: "/spec/orgId"
+        value: "ffk.no"
+      - op: replace
+        path: "/spec/env/1/value"
+        value: "56"
+      - op: replace
+        path: "/spec/env/2/value"
+        value: "https://beta.felleskomponent.no"
+      - op: replace
+        path: "/spec/env/3/value"
+        value: "ffk.no"
+    target:
+      kind: Application
+      name: fint-utdanning-larling-adapter
+
+  - patch: |-
+      - op: replace
+        path: "/metadata/labels/app.kubernetes.io~1instance"
+        value: "fint-utdanning-larling-adapter_ffk_no"
+      - op: replace
+        path: "/spec/orgId"
+        value: "ffk.no"
+    target:
+      kind: FintAdapter
+      name: utdanning-larling-adapter
