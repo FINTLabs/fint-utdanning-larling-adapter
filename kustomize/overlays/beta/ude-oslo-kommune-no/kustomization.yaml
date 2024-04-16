@@ -5,21 +5,21 @@ resources:
   - ../../../base
 commonLabels:
   app.kubernetes.io/name: fint-utdanning-larling-adapter
-  app.kubernetes.io/instance: fint-utdanning-larling-adapter_ude-oslo-kommune_no
+  app.kubernetes.io/instance: fint-utdanning-larling-adapter_ude_oslo_kommune_no
   app.kubernetes.io/version: latest
   app.kubernetes.io/component: adapter
   app.kubernetes.io/part-of: fint-core
   fintlabs.no/team: core
-  fintlabs.no/org-id: ude-oslo-kommune.no
+  fintlabs.no/org-id: ude.oslo.kommune.no
 
 patches:
   - patch: |-
       - op: replace
         path: "/metadata/labels/app.kubernetes.io~1instance"
-        value: "fint-utdanning-larling-adapter_ude-oslo-kommune_no"
+        value: "fint-utdanning-larling-adapter_ude_oslo_kommune_no"
       - op: replace
         path: "/spec/orgId"
-        value: "ude-oslo-kommune.no"
+        value: "ude.oslo.kommune.no"
       - op: replace
         path: "/spec/env/1/value"
         value: "3"
@@ -28,7 +28,7 @@ patches:
         value: "https://beta.felleskomponent.no"
       - op: replace
         path: "/spec/env/3/value"
-        value: "ude-oslo-kommune.no"
+        value: "ude.oslo.kommune.no"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter
@@ -36,10 +36,10 @@ patches:
   - patch: |-
       - op: replace
         path: "/metadata/labels/app.kubernetes.io~1instance"
-        value: "fint-utdanning-larling-adapter_ude-oslo-kommune_no"
+        value: "fint-utdanning-larling-adapter_ude_oslo_kommune_no"
       - op: replace
         path: "/spec/orgId"
-        value: "ude-oslo-kommune.no"
+        value: "ude.oslo.kommune.no"
     target:
       kind: FintAdapter
       name: utdanning-larling-adapter
