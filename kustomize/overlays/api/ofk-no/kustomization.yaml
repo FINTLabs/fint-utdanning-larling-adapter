@@ -29,6 +29,9 @@ patches:
       - op: replace
         path: "/spec/env/3/value"
         value: "ofk.no"
+      - op: replace
+        path: "/spec/onePassword/itemPath"
+        value: "vaults/aks-api-vault/items/fint-utdanning-larling-adapter"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter
