@@ -1,5 +1,6 @@
 package no.fintlabs.model.larling;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import no.fint.model.felles.kompleksedatatyper.Identifikator;
@@ -10,24 +11,20 @@ import no.fint.model.resource.felles.VirksomhetResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fint.model.resource.utdanning.utdanningsprogram.ProgramomradeResource;
 import no.fintlabs.CacheService;
+import no.fintlabs.TimeConverter;
 import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class LarlingService {
 
     private final CacheService cacheService;
-    private final SimpleDateFormat dateFormat;
-
-    public LarlingService(CacheService cacheService) {
-        this.cacheService = cacheService;
-        this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    }
+    private final TimeConverter timeConverter;
 
     public List<LarlingResource> getLarlingResources() {
         try {
@@ -52,9 +49,10 @@ public class LarlingService {
 
         Periode periode = new Periode();
         if (!contract.getStartDato().isEmpty())
-            periode.setStart(dateFormat.parse(contract.getStartDato())); log.info(contract.getStartDato());
+            periode.setStart(timeConverter.convertToZuluDate(contract.getStartDato()));
+        log.info(contract.getStartDato());
         if (!contract.getSluttDato().isEmpty())
-            periode.setSlutt(dateFormat.parse(contract.getSluttDato()));
+            periode.setSlutt(timeConverter.convertToZuluDate(contract.getSluttDato()));
         larlingResource.setLaretid(periode);
 
         Identifikator identifikator = new Identifikator();

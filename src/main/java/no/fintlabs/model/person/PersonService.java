@@ -1,5 +1,6 @@
 package no.fintlabs.model.person;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import no.fint.model.felles.Person;
@@ -10,24 +11,20 @@ import no.fint.model.resource.Link;
 import no.fint.model.resource.felles.PersonResource;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.CacheService;
+import no.fintlabs.TimeConverter;
 import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PersonService {
 
     private final CacheService cacheService;
-    private final SimpleDateFormat dateFormat;
-
-    public PersonService(CacheService cacheService) {
-        this.cacheService = cacheService;
-        this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    }
+    private final TimeConverter timeConverter;
 
     public List<PersonResource> getPersonResources() {
         try {
@@ -48,7 +45,7 @@ public class PersonService {
     private PersonResource createPersonResource(Contract contract) {
         PersonResource personResource = new PersonResource();
         if (!contract.getElev().getFodselsdato().isEmpty())
-            personResource.setFodselsdato(dateFormat.parse(contract.getElev().getFodselsdato()));
+            personResource.setFodselsdato(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato())); log.info(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato()).toString());
 
         Identifikator identifikator = new Identifikator();
         identifikator.setIdentifikatorverdi(contract.getElev().getFodselsNummer());
