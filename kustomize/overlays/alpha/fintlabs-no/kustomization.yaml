@@ -25,13 +25,13 @@ patches:
         value: "32"
       - op: replace
         path: "/spec/env/2/value"
-        value: "https://api.felleskomponent.no"
+        value: "https://alpha.felleskomponent.no"
       - op: replace
         path: "/spec/env/3/value"
         value: "fintlabs.no"
       - op: replace
         path: "/spec/onePassword/itemPath"
-        value: "vaults/aks-api-vault/items/fint-utdanning-larling-adapter"
+        value: "vaults/aks-alpha-vault/items/fint-utdanning-larling-adapter"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter
