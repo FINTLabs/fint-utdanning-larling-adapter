@@ -52,7 +52,7 @@ public class LarlingService {
 
         Periode periode = new Periode();
         if (!contract.getStartDato().isEmpty())
-            periode.setStart(dateFormat.parse(contract.getStartDato()));
+            periode.setStart(dateFormat.parse(contract.getStartDato())); log.info(contract.getStartDato());
         if (!contract.getSluttDato().isEmpty())
             periode.setSlutt(dateFormat.parse(contract.getSluttDato()));
         larlingResource.setLaretid(periode);
