@@ -44,8 +44,10 @@ public class PersonService {
     @SneakyThrows
     private PersonResource createPersonResource(Contract contract) {
         PersonResource personResource = new PersonResource();
-        if (!contract.getElev().getFodselsdato().isEmpty())
-            personResource.setFodselsdato(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato())); log.info(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato()).toString());
+        if (!contract.getElev().getFodselsdato().isEmpty()) {
+            log.info(contract.getElev().getFodselsdato());
+            personResource.setFodselsdato(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato()));
+        }
 
         Identifikator identifikator = new Identifikator();
         identifikator.setIdentifikatorverdi(contract.getElev().getFodselsNummer());
