@@ -53,7 +53,6 @@ jobs:
     strategy:
       matrix:
         org:
-          - fintlabs-no
           - trondelagfylke-no
           - nfk-no
           - tffk-no
@@ -70,10 +69,14 @@ jobs:
           - ude-oslo-kommune-no
           - vlfk-no
         cluster:
-          - aks-alpha-fint-2021-11-18
+#          - aks-alpha-fint-2021-11-18
           - aks-beta-fint-2021-11-23
           - aks-api-fint-2022-02-08
 #          - aks-pwf-fint-2021-10-20
+
+        include:
+          org: fintlabs-no
+          cluster: aks-alpha-fint-2021-11-18
 
     steps:
       - name: Checkout repository
