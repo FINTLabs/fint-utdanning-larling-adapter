@@ -45,7 +45,6 @@ public class PersonService {
     private PersonResource createPersonResource(Contract contract) {
         PersonResource personResource = new PersonResource();
         if (!contract.getElev().getFodselsdato().isEmpty()) {
-            log.info(contract.getElev().getFodselsdato());
             personResource.setFodselsdato(timeConverter.convertToZuluDate(contract.getElev().getFodselsdato()));
         }
 

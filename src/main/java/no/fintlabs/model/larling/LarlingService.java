@@ -50,7 +50,6 @@ public class LarlingService {
         Periode periode = new Periode();
         if (!contract.getStartDato().isEmpty())
             periode.setStart(timeConverter.convertToZuluDate(contract.getStartDato()));
-        log.info(contract.getStartDato());
         if (!contract.getSluttDato().isEmpty())
             periode.setSlutt(timeConverter.convertToZuluDate(contract.getSluttDato()));
         larlingResource.setLaretid(periode);
