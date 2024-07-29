@@ -3,14 +3,10 @@ package no.fintlabs.restutil;
 import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.restutil.model.RequestData;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.codec.ClientCodecConfigurer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @Service
