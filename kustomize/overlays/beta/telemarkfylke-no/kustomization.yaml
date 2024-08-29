@@ -29,6 +29,9 @@ patches:
       - op: replace
         path: "/spec/env/3/value"
         value: "telemarkfylke.no"
+      - op: replace
+        path: "/spec/env/4/value"
+        value: "https://vigoiks.no/telemarkfylke-no/utdanning/larling"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter

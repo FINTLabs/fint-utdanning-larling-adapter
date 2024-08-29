@@ -25,6 +25,8 @@ spec:
       value: 'https://beta.felleskomponent.no'
     - name: fint.adapter.org-id
       value: 'org-dot'
+    - name: fint.adapter.id
+      value: https://vigoiks.no/fintlabs-no/utdanning/larling
   envFrom:
     - secretRef:
         name: fint-utdanning-larling-adapter-op
