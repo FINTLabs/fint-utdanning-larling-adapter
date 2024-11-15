@@ -1,37 +1,37 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: tffk-no
+namespace: tromsfylke-no
 resources:
   - ../../../base
 commonLabels:
   app.kubernetes.io/name: fint-utdanning-larling-adapter
-  app.kubernetes.io/instance: fint-utdanning-larling-adapter_tffk_no
+  app.kubernetes.io/instance: fint-utdanning-larling-adapter_tromsfylke_no
   app.kubernetes.io/version: latest
   app.kubernetes.io/component: adapter
   app.kubernetes.io/part-of: fint-core
   fintlabs.no/team: core
-  fintlabs.no/org-id: tffk.no
+  fintlabs.no/org-id: tromsfylke.no
 
 patches:
   - patch: |-
       - op: replace
         path: "/metadata/labels/app.kubernetes.io~1instance"
-        value: "fint-utdanning-larling-adapter_tffk_no"
+        value: "fint-utdanning-larling-adapter_tromsfylke_no"
       - op: replace
         path: "/spec/orgId"
-        value: "tffk.no"
+        value: "tromsfylke.no"
       - op: replace
         path: "/spec/env/1/value"
-        value: "54"
+        value: "55"
       - op: replace
         path: "/spec/env/2/value"
         value: "https://beta.felleskomponent.no"
       - op: replace
         path: "/spec/env/3/value"
-        value: "tffk.no"
+        value: "tromsfylke.no"
       - op: replace
         path: "/spec/env/4/value"
-        value: "https://vigoiks.no/tffk-no/utdanning/larling"
+        value: "https://vigoiks.no/tromsfylke-no/utdanning/larling"
     target:
       kind: Application
       name: fint-utdanning-larling-adapter
@@ -39,10 +39,10 @@ patches:
   - patch: |-
       - op: replace
         path: "/metadata/labels/app.kubernetes.io~1instance"
-        value: "fint-utdanning-larling-adapter_tffk_no"
+        value: "fint-utdanning-larling-adapter_tromsfylke_no"
       - op: replace
         path: "/spec/orgId"
-        value: "tffk.no"
+        value: "tromsfylke.no"
     target:
       kind: FintAdapter
       name: utdanning-larling-adapter
