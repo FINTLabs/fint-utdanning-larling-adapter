@@ -40,7 +40,7 @@ dependencies {
     implementation 'no.fintlabs:fint-core-adapter-common:0.1.5-rc-2'
     implementation "no.fint:fint-utdanning-resource-model-java:${apiVersion}"
     implementation 'no.fint:fint-model-resource:0.4.1'
-    implementation 'org.springframework.boot:spring-boot-starter-security:6.2.7'
+    implementation 'org.springframework.security:spring-security-web:6.3.5'
 
     runtimeOnly 'org.springframework.boot:spring-boot-actuator'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
