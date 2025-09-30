@@ -70,6 +70,8 @@ public class CacheService {
         restUtil.getRequestData()
                 .getKontrakter()
                 .forEach(this::addToCache);
+*/
+
     }
 
     private void addToCache(Contract contract) {
