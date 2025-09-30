@@ -32,13 +32,23 @@ public class RestUtil {
     }
 
     public RequestData getRequestData() {
-        return webClient.get()
+        /*return webClient.get()
+                .header("api-key", apiKey)
+                .header("fylkesnr", orgNumber)
+                .header("Accept", "application/json")
+                .retrieve()
+                .bodyToMono(RequestData.class)
+                .block();*/
+        log.debug("Fetching data from external API at {}", dataSourceUrl);
+        var c = webClient.get()
                 .header("api-key", apiKey)
                 .header("fylkesnr", orgNumber)
                 .header("Accept", "application/json")
                 .retrieve()
                 .bodyToMono(RequestData.class)
                 .block();
+        log.debug("Received data: {}", c);
+        return c;
     }
 
 }

@@ -43,13 +43,12 @@ dependencies {
     implementation 'org.springframework.security:spring-security-web:6.3.5'
 
     runtimeOnly 'org.springframework.boot:spring-boot-actuator'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    runtimeOnly 'org.spockframework:spock-spring:2.1-groovy-3.0'
-    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.wiremock:wiremock-standalone:3.13.1'
+
 }
 
 test {

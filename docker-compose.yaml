@@ -1,0 +1,8 @@
+services:
+  wiremock:
+    image: wiremock/wiremock:latest
+    container_name: wiremock
+    ports:
+      - "8080:8081"
+    networks:
+      - wiremock-net

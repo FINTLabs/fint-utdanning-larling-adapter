@@ -1,0 +1,29 @@
+fint:
+  fylkesnr: 34
+  api-key: test-key
+  data-source-url: http://localhost:8089/rest/laktiv
+  adapter:
+    id: https://vigoiks.no/innlandetfylke-no/utdanning/larling
+    base-url: https://alpha.felleskomponent.no
+    registration-id: fint
+    org-id: innlandetfylke.no
+    heartbeat-interval: 1
+    capabilities:
+      larling:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: larling
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
+      person:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: person
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
+      virksomhet:
+        domain-name: utdanning
+        packageName: larling
+        resource-name: virksomhet
+        fullSyncIntervalInDays: 1
+        deltaSyncInterval: IMMEDIATE
