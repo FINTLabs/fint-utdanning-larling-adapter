@@ -1,19 +1,13 @@
 package no.fintlabs;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fintlabs.model.larling.LarlingPublisher;
-import no.fintlabs.restutil.RestUtil;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.web.client.RestTemplate;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.verify;
 
 @WireMockTest(httpPort = 8089)
 @SpringBootTest
