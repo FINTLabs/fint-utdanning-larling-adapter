@@ -20,10 +20,17 @@ public class LarlingPublisher extends ResourcePublisher<LarlingResource, Resourc
     }
 
     @Override
-    @Scheduled(initialDelayString = "1000", fixedRateString = "86400000") // Every 24 hours
+    @Scheduled(cron = "0 0 1 * * *")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));
+    }
+
+
+    @Scheduled(initialDelayString = "1000")
+    public void doInitialSync() {
+        log.info("Starting initial sync");
+        doFullSync();
     }
 
     // Not in use

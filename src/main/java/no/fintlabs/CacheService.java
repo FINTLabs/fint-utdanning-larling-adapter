@@ -62,15 +62,9 @@ public class CacheService {
 
     private void fillCache() {
         log.debug("Filling Cache...");
-        RequestData requestData = restUtil.getRequestData();
-        log.debug("RequestData: {}", requestData);
-        List<Contract> contracts = requestData.getKontrakter();
-        log.debug("Found {} contracts", contracts.size());
-/*
         restUtil.getRequestData()
                 .getKontrakter()
                 .forEach(this::addToCache);
-*/
 
     }
 

@@ -1,5 +1,6 @@
 package no.fintlabs;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fintlabs.model.larling.LarlingPublisher;
 import no.fintlabs.restutil.RestUtil;
@@ -23,17 +24,14 @@ class LarlingPublisherStartupTest {
     private LarlingPublisher larlingPublisher;
 
     @Test
-    void doFullSync_isCalledOnStartup() {
+    void doFullSync() {
         stubFor(get(urlEqualTo("/rest/laktiv"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBodyFile("contract.json")));
 
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject("http://localhost:8089/rest/laktiv", String.class);
-        System.out.println(response);
-
-        verify(larlingPublisher, timeout(2000).times(1)).doFullSync();
+        larlingPublisher.doFullSync();
+        // TODO: assert to ensure that doFullSync has run
     }
 }

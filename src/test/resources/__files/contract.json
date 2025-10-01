@@ -6,19 +6,19 @@
       "elev": {
         "fornavn": "Test",
         "etternavn": "Student",
-        "fodselsdato": "2000-01-01",
-        "fodselsNummer": "12345678901",
-        "systemId": "sys-1",
+        "fdato": "01.01.2000",
+        "fnr": "12345678901",
+        "sysId": "sys-1",
         "epost": "test@student.no",
-        "mobilNummer": "12345678"
+        "mobilnr": "12345678"
       },
       "type": "Apprenticeship",
-      "programKode": "PRG123",
-      "programNavn": "Software Development",
-      "bedriftsNummer": "987654321",
-      "bedriftsNavn": "Tech Solutions AS",
-      "startDato": "2024-08-01",
-      "sluttDato": "2025-07-31"
+      "promrkode": "PRG123",
+      "promrnavn": "Software Development",
+      "bnr": "987654321",
+      "bedrnavn": "Tech Solutions AS",
+      "start": "01.01.2000",
+      "slutt": "01.01.2000"
     }
   ]
 }
