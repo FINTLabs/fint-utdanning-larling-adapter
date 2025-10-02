@@ -2,29 +2,32 @@ package no.fintlabs.integration;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.felles.PersonResource;
+import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.person.PersonPublisher;
+import no.fintlabs.model.person.PersonSubscriber;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@WireMockTest(httpPort = 8089)
+@WireMockTest
 @Import(BaseTestConfiguration.class)
-public class PersonTest {
+public class PersonTest extends BaseIntegrationTest {
+
+    @Mock
+    private PersonSubscriber personSubscriber;
 
     @SpyBean
     private PersonPublisher personPublisher;
@@ -34,12 +37,7 @@ public class PersonTest {
 
     @Test
     void doFullSync_shouldSubmitAllResources() {
-        stubFor(get(urlEqualTo("/rest/laktiv"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBodyFile("contract.json")));
-
+        doReturn(1).when(personPublisher).submit(any());
         personPublisher.doInitialSync();
 
         // Capture the values that is to be submitted

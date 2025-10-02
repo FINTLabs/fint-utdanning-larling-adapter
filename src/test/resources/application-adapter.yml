@@ -5,12 +5,12 @@ fint:
   data-source-url: http://localhost:8089/rest/laktiv
   adapter:
     id: https://vigoiks.no/innlandetfylke-no/utdanning/larling
-    base-url: https://alpha.felleskomponent.no
+    base-url: http://localhost:8089
     registration-id: fint
     org-id: innlandetfylke.no
     heartbeat-interval: 1
     capabilities:
-      larling:
+      larling :
         domain-name: utdanning
         packageName: larling
         resource-name: larling

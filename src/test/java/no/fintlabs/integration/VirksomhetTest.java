@@ -1,7 +1,7 @@
 package no.fintlabs.integration;
 
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.felles.VirksomhetResource;
+import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.virksomhet.VirksomhetPublisher;
@@ -14,15 +14,12 @@ import org.springframework.context.annotation.Import;
 
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@WireMockTest(httpPort = 8089)
 @Import(BaseTestConfiguration.class)
-public class VirksomhetTest {
+public class VirksomhetTest extends BaseIntegrationTest {
 
     @SpyBean
     private VirksomhetPublisher virksomhetPublisher;
@@ -32,12 +29,7 @@ public class VirksomhetTest {
 
     @Test
     void doFullSync_shouldSubmitAllResources() {
-        stubFor(get(urlEqualTo("/rest/laktiv"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBodyFile("contract.json")));
-
+        doReturn(1).when(virksomhetPublisher).submit(any());
         virksomhetPublisher.doInitialSync();
 
         // Capture the values that is to be submitted

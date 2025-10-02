@@ -2,6 +2,7 @@ package no.fintlabs.integration;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.larling.LarlingPublisher;
@@ -11,19 +12,19 @@ import org.mockito.Captor;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 // BaseTestConfiguration prevents AdapterRegisterService from running during tests
 @SpringBootTest
-@WireMockTest(httpPort = 8089)
 @Import(BaseTestConfiguration.class)
-public class LarlingTest {
+public class LarlingTest extends BaseIntegrationTest {
+
+
 
     @SpyBean
     private LarlingPublisher larlingPublisher;
@@ -33,12 +34,7 @@ public class LarlingTest {
 
     @Test
     void doFullSync_shouldSubmitAllResources() {
-        stubFor(get(urlEqualTo("/rest/laktiv"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBodyFile("contract.json")));
-
+        doReturn(1).when(larlingPublisher).submit(any());
         larlingPublisher.doInitialSync();
 
         // Capture the values that is to be submitted
@@ -51,7 +47,6 @@ public class LarlingTest {
         assertThat(submittedResources)
                 .anyMatch(resource -> "sys-1".equals(resource.getSystemId().getIdentifikatorverdi()));
     }
-
 
 }
 
