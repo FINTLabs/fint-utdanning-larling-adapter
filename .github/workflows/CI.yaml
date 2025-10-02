@@ -31,6 +31,9 @@ jobs:
           gradle-version: wrapper
           arguments: build
 
+      - name: Gradle Build Check
+        run: ./gradlew build
+
       - name: Trigger CD
         if: github.ref == 'refs/heads/main'
         uses: peter-evans/repository-dispatch@v2
