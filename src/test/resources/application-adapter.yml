@@ -1,6 +1,7 @@
 fint:
   fylkesnr: 34
   api-key: test-key
+  cron: "-"
   data-source-url: http://localhost:8089/rest/laktiv
   adapter:
     id: https://vigoiks.no/innlandetfylke-no/utdanning/larling

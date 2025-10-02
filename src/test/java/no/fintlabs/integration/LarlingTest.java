@@ -1,58 +1,57 @@
 package no.fintlabs.integration;
 
-import no.fint.model.felles.kompleksedatatyper.Identifikator;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.BaseTestConfiguration;
-import no.fintlabs.adapter.AdapterRegisterService;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.larling.LarlingPublisher;
-import no.fintlabs.model.larling.LarlingRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 // BaseTestConfiguration prevents AdapterRegisterService from running during tests
 @SpringBootTest
+@WireMockTest(httpPort = 8089)
 @Import(BaseTestConfiguration.class)
 public class LarlingTest {
-
-    @MockBean
-    private LarlingRepository larlingRepository;
 
     @SpyBean
     private LarlingPublisher larlingPublisher;
 
+    @Captor
+    ArgumentCaptor<SyncData<LarlingResource>> captor;
+
     @Test
     void doFullSync_shouldSubmitAllResources() {
-        // Arrange
-        List<LarlingResource> testResources = List.of(
-                createLarlingResource("1"),
-                createLarlingResource("2"),
-                createLarlingResource("3")
-        );
+        stubFor(get(urlEqualTo("/rest/laktiv"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBodyFile("contract.json")));
 
-        when(larlingRepository.getResources()).thenReturn(testResources);
+        larlingPublisher.doInitialSync();
 
-        // Act
-        larlingPublisher.doFullSync();
+        // Capture the values that is to be submitted
+        verify(larlingPublisher).submit(captor.capture());
+        SyncData<LarlingResource> submittedData = captor.getValue();
 
-        // Assert
-        verify(larlingPublisher).submit(SyncData.ofPostData(testResources));
+        // Verify that the submitted data contains values from contract.json
+        List<LarlingResource> submittedResources = submittedData.getResources();
+        assertThat(submittedResources).isNotEmpty();
+        assertThat(submittedResources)
+                .anyMatch(resource -> "sys-1".equals(resource.getSystemId().getIdentifikatorverdi()));
     }
 
-    private LarlingResource createLarlingResource(String systemIdValue) {
-        LarlingResource resource = new LarlingResource();
-        Identifikator systemId = new Identifikator();
-        systemId.setIdentifikatorverdi(systemIdValue);
-        resource.setSystemId(systemId);
-        return resource;
-    }
 
 }
 

@@ -1,4 +1,5 @@
 fint:
+  cron: "0 0 1 * * *"
   adapter:
     id: https://vigoiks.no/fintlabs-no/utdanning/larling
     base-url: https://beta.felleskomponent.no

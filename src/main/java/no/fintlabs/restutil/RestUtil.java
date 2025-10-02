@@ -15,7 +15,6 @@ public class RestUtil {
     private final WebClient webClient;
     private final String orgNumber;
     private final String apiKey;
-    private final String dataSourceUrl;
 
     public RestUtil(
             WebClient.Builder webClientBuilder,
@@ -25,9 +24,8 @@ public class RestUtil {
     ) {
         this.orgNumber = orgNumber;
         this.apiKey = apiKey;
-        this.dataSourceUrl = dataSourceUrl;
         this.webClient = webClientBuilder
-                .baseUrl(this.dataSourceUrl)
+                .baseUrl(dataSourceUrl)
                 .codecs(this::configureCodecs)
                 .build();
         log.info("RestUtil initialized with URL: {}", dataSourceUrl);
@@ -39,23 +37,13 @@ public class RestUtil {
 
 
     public RequestData getRequestData() {
-        /*return webClient.get()
-                .header("api-key", apiKey)
-                .header("fylkesnr", orgNumber)
-                .header("Accept", "application/json")
-                .retrieve()
-                .bodyToMono(RequestData.class)
-                .block();*/
-        log.debug("Fetching data from external API at {}", dataSourceUrl);
-        var c = webClient.get()
+        return webClient.get()
                 .header("api-key", apiKey)
                 .header("fylkesnr", orgNumber)
                 .header("Accept", "application/json")
                 .retrieve()
                 .bodyToMono(RequestData.class)
                 .block();
-        log.debug("Received data: {}", c);
-        return c;
     }
 
 }

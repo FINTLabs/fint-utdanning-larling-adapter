@@ -14,13 +14,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class LarlingPublisher extends ResourcePublisher<LarlingResource, ResourceRepository<LarlingResource>> {
-
     public LarlingPublisher(LarlingRepository repository, AdapterProperties adapterProperties) {
         super(repository, adapterProperties);
     }
 
     @Override
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "${fint.cron}")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));

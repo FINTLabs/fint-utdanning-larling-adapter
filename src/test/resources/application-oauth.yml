@@ -8,7 +8,7 @@ spring:
         registration:
           fint:
             authorization-grant-type: password
-            client-id:
-            client-secret:
+            client-id: dummy-client-id
+            client-secret: dummy-client-secret
             provider: fint-idp
             scope: fint-adapter

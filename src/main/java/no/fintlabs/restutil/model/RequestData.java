@@ -12,11 +12,4 @@ public class RequestData {
     private String errorMessage;
     private int antall;
     private List<Contract> kontrakter;
-
-
-    public List<Contract> getKontrakter() {
-        System.out.println(kontrakter);
-        return kontrakter;
-    }
-
 }
