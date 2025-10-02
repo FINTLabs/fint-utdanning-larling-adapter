@@ -19,10 +19,16 @@ public class PersonPublisher extends ResourcePublisher<PersonResource, ResourceR
     }
 
     @Override
-    @Scheduled(initialDelayString = "1000", fixedRateString = "86400000")
+    @Scheduled(cron = "${fint.cron}")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));
+    }
+
+    @Scheduled(initialDelayString = "1000")
+    public void doInitialSync() {
+        log.info("Starting initial sync for resource {}", getCapability().getEntityUri());
+        doFullSync();
     }
 
     // Not in use

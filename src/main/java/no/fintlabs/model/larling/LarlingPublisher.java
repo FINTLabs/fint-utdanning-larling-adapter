@@ -28,7 +28,7 @@ public class LarlingPublisher extends ResourcePublisher<LarlingResource, Resourc
 
     @Scheduled(initialDelayString = "1000")
     public void doInitialSync() {
-        log.info("Starting initial sync");
+        log.info("Starting initial sync for resource {}", getCapability().getEntityUri());
         doFullSync();
     }
 
