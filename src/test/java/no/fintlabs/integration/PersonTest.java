@@ -44,7 +44,7 @@ public class PersonTest extends BaseIntegrationTest {
         verify(personPublisher).submit(captor.capture());
         SyncData<PersonResource> submittedData = captor.getValue();
 
-        // Verify that the submitted data contains values from person_contract.json
+        // Verify that the submitted data contains values from contract.json
         List<PersonResource> submittedResources = submittedData.getResources();
         assertThat(submittedResources).isNotEmpty();
         assertThat(submittedResources)

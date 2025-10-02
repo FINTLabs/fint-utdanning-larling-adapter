@@ -36,7 +36,7 @@ public class VirksomhetTest extends BaseIntegrationTest {
         verify(virksomhetPublisher).submit(captor.capture());
         SyncData<VirksomhetResource> submittedData = captor.getValue();
 
-        // Verify that the submitted data contains values from person_contract.json
+        // Verify that the submitted data contains values from contract.json
         List<VirksomhetResource> submittedResources = submittedData.getResources();
         assertThat(submittedResources).isNotEmpty();
         assertThat(submittedResources)
