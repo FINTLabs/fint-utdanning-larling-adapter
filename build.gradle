@@ -7,13 +7,16 @@ plugins {
 }
 
 group = 'no.fintlabs'
-sourceCompatibility = 17
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
     repositories {
         maven {
-            url "https://repo.fintlabs.no/releases"
+            url = "https://repo.fintlabs.no/releases"
         }
     }
     mavenLocal()
@@ -42,12 +45,14 @@ dependencies {
     implementation 'no.fint:fint-model-resource:0.4.1'
     implementation 'org.springframework.security:spring-security-web:6.3.5'
 
-    runtimeOnly 'org.springframework.boot:spring-boot-actuator'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.wiremock:wiremock-standalone:3.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 
 }
 
