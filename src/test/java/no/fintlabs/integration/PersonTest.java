@@ -1,16 +1,15 @@
 package no.fintlabs.integration;
 
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.felles.PersonResource;
 import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
+import no.fintlabs.TimeConverter;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.person.PersonPublisher;
-import no.fintlabs.model.person.PersonSubscriber;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
@@ -22,12 +21,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@WireMockTest
 @Import(BaseTestConfiguration.class)
 public class PersonTest extends BaseIntegrationTest {
 
-    @Mock
-    private PersonSubscriber personSubscriber;
+    @Autowired
+    private TimeConverter timeConverter;
 
     @SpyBean
     private PersonPublisher personPublisher;
@@ -46,10 +44,13 @@ public class PersonTest extends BaseIntegrationTest {
 
         // Verify that the submitted data contains values from contract.json
         List<PersonResource> submittedResources = submittedData.getResources();
-        assertThat(submittedResources).isNotEmpty();
-        assertThat(submittedResources)
-                .anyMatch(resource -> "12345678901".equals(resource.getFodselsnummer().getIdentifikatorverdi()));
+        PersonResource resource = submittedResources.get(0);
 
+        assertThat("12345678901").isEqualTo(resource.getFodselsnummer().getIdentifikatorverdi());
+        assertThat("Test").isEqualTo(resource.getNavn().getFornavn());
+        assertThat("Student").isEqualTo(resource.getNavn().getEtternavn());
+        assertThat(timeConverter.convertToZuluDate("01.01.2000")).isEqualTo(resource.getFodselsdato());
+        assertThat("test@student.no").isEqualTo(resource.getKontaktinformasjon().getEpostadresse());
+        assertThat("12345678").isEqualTo(resource.getKontaktinformasjon().getMobiltelefonnummer());
     }
-
 }

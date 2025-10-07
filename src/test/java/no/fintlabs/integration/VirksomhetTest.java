@@ -38,10 +38,10 @@ public class VirksomhetTest extends BaseIntegrationTest {
 
         // Verify that the submitted data contains values from contract.json
         List<VirksomhetResource> submittedResources = submittedData.getResources();
-        assertThat(submittedResources).isNotEmpty();
-        assertThat(submittedResources)
-                .anyMatch(resource -> "987654321".equals(resource.getVirksomhetsId().getIdentifikatorverdi()));
+        VirksomhetResource resource = submittedResources.get(0);
 
+        assertThat(resource.getVirksomhetsId().getIdentifikatorverdi()).isEqualTo("987654321");
+        assertThat(resource.getLarling().get(0).getHref()).endsWith("sys-1");
     }
 
 }

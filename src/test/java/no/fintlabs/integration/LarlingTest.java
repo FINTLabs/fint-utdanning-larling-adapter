@@ -1,11 +1,14 @@
 package no.fintlabs.integration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import no.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.adapter.datasync.SyncData;
 import no.fintlabs.model.larling.LarlingPublisher;
+import no.fintlabs.restutil.model.Contract;
+import no.fintlabs.restutil.model.RequestData;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -14,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,9 +47,11 @@ public class LarlingTest extends BaseIntegrationTest {
 
         // Verify that the submitted data contains values from contract.json
         List<LarlingResource> submittedResources = submittedData.getResources();
-        assertThat(submittedResources).isNotEmpty();
-        assertThat(submittedResources)
-                .anyMatch(resource -> "sys-1".equals(resource.getSystemId().getIdentifikatorverdi()));
+        LarlingResource resource = submittedResources.get(0);
+
+        assertThat("sys-1").isEqualTo(resource.getSystemId().getIdentifikatorverdi());
+        assertThat("Apprenticeship").isEqualTo(resource.getKontraktstype());
+        assertThat(resource.getPerson().get(0).getHref()).endsWith("12345678901");
     }
 
 }
