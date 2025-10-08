@@ -13,9 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,8 +28,7 @@ import static org.mockito.Mockito.*;
 public class LarlingTest extends BaseIntegrationTest {
 
 
-
-    @SpyBean
+    @MockitoSpyBean
     private LarlingPublisher larlingPublisher;
 
     @Captor

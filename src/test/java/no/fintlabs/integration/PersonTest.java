@@ -11,8 +11,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class PersonTest extends BaseIntegrationTest {
     @Autowired
     private TimeConverter timeConverter;
 
-    @SpyBean
+    @MockitoSpyBean
     private PersonPublisher personPublisher;
 
     @Captor

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 @Import(BaseTestConfiguration.class)
 public class VirksomhetTest extends BaseIntegrationTest {
 
-    @SpyBean
+    @MockitoSpyBean
     private VirksomhetPublisher virksomhetPublisher;
 
     @Captor

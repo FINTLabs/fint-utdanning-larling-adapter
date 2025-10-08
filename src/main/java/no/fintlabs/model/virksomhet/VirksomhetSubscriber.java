@@ -4,7 +4,7 @@ import no.fint.model.resource.felles.VirksomhetResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourceSubscriber;
 import no.fintlabs.adapter.models.AdapterCapability;
-import no.fintlabs.adapter.models.SyncPageEntry;
+import no.fintlabs.adapter.models.sync.SyncPageEntry;
 import no.fintlabs.adapter.validator.ValidatorService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class VirksomhetSubscriber extends ResourceSubscriber<VirksomhetResource, VirksomhetPublisher> {
 
-    protected VirksomhetSubscriber(WebClient webClient, AdapterProperties props, VirksomhetPublisher publisher, ValidatorService<VirksomhetResource> validatorService) {
+    protected VirksomhetSubscriber(WebClient webClient, AdapterProperties props, VirksomhetPublisher publisher, ValidatorService validatorService) {
         super(webClient, props, publisher, validatorService);
     }
 
@@ -22,7 +22,7 @@ public class VirksomhetSubscriber extends ResourceSubscriber<VirksomhetResource,
     }
 
     @Override
-    protected SyncPageEntry<VirksomhetResource> createSyncPageEntry(VirksomhetResource resource) {
+    protected SyncPageEntry createSyncPageEntry(VirksomhetResource resource) {
         return SyncPageEntry.of(resource.getVirksomhetsId().getIdentifikatorverdi(), resource);
     }
 }
