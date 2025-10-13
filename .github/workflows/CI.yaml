@@ -25,11 +25,8 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v3
 
-      - name: Gradle Setup
-        uses: gradle/gradle-build-action@v2.8.0
-        with:
-          gradle-version: wrapper
-          arguments: build
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Run Spotless Check
         run: ./gradlew :spotlessCheck --stacktrace --configuration-cache
