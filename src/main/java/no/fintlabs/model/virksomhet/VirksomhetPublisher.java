@@ -12,34 +12,35 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class VirksomhetPublisher extends ResourcePublisher<VirksomhetResource, ResourceRepository<VirksomhetResource>> {
+public class VirksomhetPublisher
+    extends ResourcePublisher<VirksomhetResource, ResourceRepository<VirksomhetResource>> {
 
-    public VirksomhetPublisher(VirksomhetRepository repository, AdapterProperties adapterProperties) {
-        super(repository, adapterProperties);
-    }
+  public VirksomhetPublisher(VirksomhetRepository repository, AdapterProperties adapterProperties) {
+    super(repository, adapterProperties);
+  }
 
-    @Override
-    @Scheduled(cron = "${fint.cron}")
-    public void doFullSync() {
-        log.info("Start full sync for resource {}", getCapability().getEntityUri());
-        submit(SyncData.ofPostData(repository.getResources()));
-    }
+  @Override
+  @Scheduled(cron = "${fint.cron}")
+  public void doFullSync() {
+    log.info("Start full sync for resource {}", getCapability().getEntityUri());
+    submit(SyncData.ofPostData(repository.getResources()));
+  }
 
-    @Scheduled(initialDelayString = "1000")
-    public void doInitialSync() {
-        log.info("Starting initial sync for resource {}", getCapability().getEntityUri());
-        doFullSync();
-    }
+  @Scheduled(initialDelayString = "1000")
+  public void doInitialSync() {
+    log.info("Starting initial sync for resource {}", getCapability().getEntityUri());
+    doFullSync();
+  }
 
-    // Not in use
-    @Override
-    public void doDeltaSync() {
-        log.info("Start delta sync for resource {}", getCapability().getEntityUri());
-        submit(SyncData.ofPatchData(repository.getUpdatedResources()));
-    }
+  // Not in use
+  @Override
+  public void doDeltaSync() {
+    log.info("Start delta sync for resource {}", getCapability().getEntityUri());
+    submit(SyncData.ofPatchData(repository.getUpdatedResources()));
+  }
 
-    @Override
-    protected AdapterCapability getCapability() {
-        return adapterProperties.getCapabilityByResource("virksomhet");
-    }
+  @Override
+  protected AdapterCapability getCapability() {
+    return adapterProperties.getCapabilityByResource("virksomhet");
+  }
 }

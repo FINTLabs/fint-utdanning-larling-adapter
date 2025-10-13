@@ -6,25 +6,24 @@ import lombok.Data;
 @Data
 public class Student {
 
-    @JsonProperty("fornavn")
-    private String fornavn;
+  @JsonProperty("fornavn")
+  private String fornavn;
 
-    @JsonProperty("etternavn")
-    private String etternavn;
+  @JsonProperty("etternavn")
+  private String etternavn;
 
-    @JsonProperty("fdato")
-    private String fodselsdato;
+  @JsonProperty("fdato")
+  private String fodselsdato;
 
-    @JsonProperty("fnr")
-    private String fodselsNummer;
+  @JsonProperty("fnr")
+  private String fodselsNummer;
 
-    @JsonProperty("sysId")
-    private String systemId;
+  @JsonProperty("sysId")
+  private String systemId;
 
-    @JsonProperty("epost")
-    private String epost;
+  @JsonProperty("epost")
+  private String epost;
 
-    @JsonProperty("mobilnr")
-    private String mobilNummer;
-
+  @JsonProperty("mobilnr")
+  private String mobilNummer;
 }

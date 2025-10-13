@@ -6,28 +6,27 @@ import lombok.Data;
 @Data
 public class Contract {
 
-    @JsonProperty("elev")
-    private Student elev;
+  @JsonProperty("elev")
+  private Student elev;
 
-    @JsonProperty("type")
-    private String type;
+  @JsonProperty("type")
+  private String type;
 
-    @JsonProperty("promrkode")
-    private String programKode;
+  @JsonProperty("promrkode")
+  private String programKode;
 
-    @JsonProperty("promrnavn")
-    private String programNavn;
+  @JsonProperty("promrnavn")
+  private String programNavn;
 
-    @JsonProperty("bnr")
-    private String bedriftsNummer;
+  @JsonProperty("bnr")
+  private String bedriftsNummer;
 
-    @JsonProperty("bedrnavn")
-    private String bedriftsNavn;
+  @JsonProperty("bedrnavn")
+  private String bedriftsNavn;
 
-    @JsonProperty("start")
-    private String startDato;
+  @JsonProperty("start")
+  private String startDato;
 
-    @JsonProperty("slutt")
-    private String sluttDato;
-
+  @JsonProperty("slutt")
+  private String sluttDato;
 }

@@ -12,17 +12,21 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Service
 public class LarlingSubscriber extends ResourceSubscriber<LarlingResource, LarlingPublisher> {
 
-    protected LarlingSubscriber(WebClient webClient, AdapterProperties props, LarlingPublisher publisher, ValidatorService validatorService) {
-        super(webClient, props, publisher, validatorService);
-    }
+  protected LarlingSubscriber(
+      WebClient webClient,
+      AdapterProperties props,
+      LarlingPublisher publisher,
+      ValidatorService validatorService) {
+    super(webClient, props, publisher, validatorService);
+  }
 
-    @Override
-    protected AdapterCapability getCapability() {
-        return adapterProperties.getCapabilities().get("larling");
-    }
+  @Override
+  protected AdapterCapability getCapability() {
+    return adapterProperties.getCapabilities().get("larling");
+  }
 
-    @Override
-    protected SyncPageEntry createSyncPageEntry(LarlingResource resource) {
-        return SyncPageEntry.of(resource.getSystemId().getIdentifikatorverdi(), resource);
-    }
+  @Override
+  protected SyncPageEntry createSyncPageEntry(LarlingResource resource) {
+    return SyncPageEntry.of(resource.getSystemId().getIdentifikatorverdi(), resource);
+  }
 }
