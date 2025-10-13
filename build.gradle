@@ -59,7 +59,7 @@ test {
 spotless {
     java {
         // Use googleJavaFormat, break up long strings, dont format javadoc
-        googleJavaFormat('1.29.0').reflowLongStrings().skipJavadocFormatting()
+        googleJavaFormat('1.25.0').reflowLongStrings().skipJavadocFormatting()
         formatAnnotations()
         importOrder()
         removeUnusedImports()
