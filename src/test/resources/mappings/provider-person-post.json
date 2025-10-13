@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/provider/utdanning/larling/larling"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{}"
+
+  }
+}

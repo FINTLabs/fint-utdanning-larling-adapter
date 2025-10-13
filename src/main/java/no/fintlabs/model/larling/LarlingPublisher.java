@@ -14,16 +14,22 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class LarlingPublisher extends ResourcePublisher<LarlingResource, ResourceRepository<LarlingResource>> {
-
     public LarlingPublisher(LarlingRepository repository, AdapterProperties adapterProperties) {
         super(repository, adapterProperties);
     }
 
     @Override
-    @Scheduled(initialDelayString = "1000", fixedRateString = "86400000")
+    @Scheduled(cron = "${fint.cron}")
     public void doFullSync() {
         log.info("Start full sync for resource {}", getCapability().getEntityUri());
         submit(SyncData.ofPostData(repository.getResources()));
+    }
+
+
+    @Scheduled(initialDelayString = "1000")
+    public void doInitialSync() {
+        log.info("Starting initial sync for resource {}", getCapability().getEntityUri());
+        doFullSync();
     }
 
     // Not in use

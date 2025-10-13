@@ -1,0 +1,47 @@
+package no.fintlabs.integration;
+
+import no.fint.model.resource.felles.VirksomhetResource;
+import no.fintlabs.BaseIntegrationTest;
+import no.fintlabs.BaseTestConfiguration;
+import no.fintlabs.adapter.datasync.SyncData;
+import no.fintlabs.model.virksomhet.VirksomhetPublisher;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+@Import(BaseTestConfiguration.class)
+public class VirksomhetTest extends BaseIntegrationTest {
+
+    @MockitoSpyBean
+    private VirksomhetPublisher virksomhetPublisher;
+
+    @Captor
+    private ArgumentCaptor<SyncData<VirksomhetResource>> captor;
+
+    @Test
+    void doFullSync_shouldSubmitAllResources() {
+        doReturn(1).when(virksomhetPublisher).submit(any());
+        virksomhetPublisher.doInitialSync();
+
+        // Capture the values that is to be submitted
+        verify(virksomhetPublisher).submit(captor.capture());
+        SyncData<VirksomhetResource> submittedData = captor.getValue();
+
+        // Verify that the submitted data contains values from contract.json
+        List<VirksomhetResource> submittedResources = submittedData.getResources();
+        VirksomhetResource resource = submittedResources.get(0);
+
+        assertThat(resource.getVirksomhetsId().getIdentifikatorverdi()).isEqualTo("987654321");
+        assertThat(resource.getLarling().get(0).getHref()).endsWith("sys-1");
+    }
+
+}

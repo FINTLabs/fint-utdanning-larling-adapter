@@ -3,6 +3,7 @@ package no.fintlabs;
 import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.restutil.RestUtil;
 import no.fintlabs.restutil.model.Contract;
+import no.fintlabs.restutil.model.RequestData;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class CacheService {
         restUtil.getRequestData()
                 .getKontrakter()
                 .forEach(this::addToCache);
+
     }
 
     private void addToCache(Contract contract) {

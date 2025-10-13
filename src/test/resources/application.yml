@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    include:
+      - adapter
+      - oauth
+
+logging:
+  level:
+    no.fintlabs: DEBUG

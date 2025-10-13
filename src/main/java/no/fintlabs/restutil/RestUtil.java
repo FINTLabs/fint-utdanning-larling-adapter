@@ -13,23 +13,28 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class RestUtil {
 
     private final WebClient webClient;
+    private final String orgNumber;
+    private final String apiKey;
 
-    @Value("${fint.fylkesnr}")
-    private String orgNumber;
-
-    @Value("${fint.api-key}")
-    private String apiKey;
-
-    public RestUtil(WebClient.Builder webClientBuilder) {
+    public RestUtil(
+            WebClient.Builder webClientBuilder,
+            @Value("${fint.fylkesnr}") String orgNumber,
+            @Value("${fint.api-key}") String apiKey,
+            @Value("${fint.data-source-url}") String dataSourceUrl
+    ) {
+        this.orgNumber = orgNumber;
+        this.apiKey = apiKey;
         this.webClient = webClientBuilder
-                .baseUrl("https://www.vigo.no/vigows/rest/laktiv")
+                .baseUrl(dataSourceUrl)
                 .codecs(this::configureCodecs)
                 .build();
+        log.info("RestUtil initialized with URL: {}", dataSourceUrl);
     }
 
     private void configureCodecs(ClientCodecConfigurer configurer) {
         configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024); // 10 MB buffer size
     }
+
 
     public RequestData getRequestData() {
         return webClient.get()

@@ -10,5 +10,4 @@ public class RequestData {
     private String errorMessage;
     private int antall;
     private List<Contract> kontrakter;
-
 }
