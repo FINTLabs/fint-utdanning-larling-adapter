@@ -73,9 +73,6 @@ jobs:
           - vlfk-no
         cluster:
           - ${{ inputs.cluster }}
-        include:
-          - org: fintlabs-no
-            cluster: aks-alpha-fint-2021-11-18
 
     steps:
       - name: Checkout repository
