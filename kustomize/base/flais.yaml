@@ -27,6 +27,8 @@ spec:
       value: 'org-dot'
     - name: fint.adapter.id
       value: https://vigoiks.no/fintlabs-no/utdanning/larling
+    - name: fint.data-source-url
+      value: 'https://www.vigo.no/vigows/rest/laktiv'
   envFrom:
     - secretRef:
         name: fint-utdanning-larling-adapter-op
