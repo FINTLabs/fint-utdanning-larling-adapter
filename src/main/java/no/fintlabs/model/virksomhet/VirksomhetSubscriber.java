@@ -1,6 +1,6 @@
 package no.fintlabs.model.virksomhet;
 
-import no.fint.model.resource.felles.VirksomhetResource;
+import no.novari.fint.model.resource.felles.VirksomhetResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourceSubscriber;
 import no.fintlabs.adapter.models.AdapterCapability;

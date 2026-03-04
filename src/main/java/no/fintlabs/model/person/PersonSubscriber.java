@@ -1,8 +1,8 @@
 package no.fintlabs.model.person;
 
-import no.fint.model.resource.felles.PersonResource;
-import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourceSubscriber;
+import no.novari.fint.model.resource.felles.PersonResource;
+import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.models.AdapterCapability;
 import no.fintlabs.adapter.models.sync.SyncPageEntry;
 import no.fintlabs.adapter.validator.ValidatorService;

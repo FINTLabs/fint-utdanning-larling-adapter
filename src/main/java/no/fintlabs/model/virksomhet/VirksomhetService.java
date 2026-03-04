@@ -1,10 +1,10 @@
 package no.fintlabs.model.virksomhet;
 
 import lombok.SneakyThrows;
-import no.fint.model.felles.kompleksedatatyper.Identifikator;
-import no.fint.model.resource.Link;
-import no.fint.model.resource.felles.VirksomhetResource;
-import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.novari.fint.model.felles.kompleksedatatyper.Identifikator;
+import no.novari.fint.model.resource.Link;
+import no.novari.fint.model.resource.felles.VirksomhetResource;
+import no.novari.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.CacheService;
 import no.fintlabs.restutil.model.Contract;
 import org.springframework.stereotype.Service;
