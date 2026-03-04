@@ -1,4 +1,4 @@
-FROM gradle:8.14.3-jdk17 as builder
+FROM gradle:8.1.1-jdk17 as builder
 USER root
 COPY . .
 RUN rm -rf /home/gradle/.gradle/caches/ && gradle --no-daemon build --refresh-dependencies --stacktrace
