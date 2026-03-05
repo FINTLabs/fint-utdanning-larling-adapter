@@ -113,6 +113,9 @@ jobs:
           renderEngine: 'kustomize'
           kustomizationPath: 'kustomize/overlays/${{ steps.environment.outputs.result }}/${{ matrix.org }}'
 
+      - name: Print credentials TEMPPORARY. REMOVE ME
+        run: echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r 'keys[]' || echo "jq not installed"
+
       - uses: azure/login@v2
         with:
           creds: "${{ secrets[format('AKS_{0}_FINT_GITHUB', steps.environment.outputs.result)] }}"
