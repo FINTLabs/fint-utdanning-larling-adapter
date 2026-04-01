@@ -10,19 +10,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class VirksomhetSubscriber extends ResourceSubscriber<VirksomhetResource, VirksomhetPublisher> {
+public class VirksomhetSubscriber
+    extends ResourceSubscriber<VirksomhetResource, VirksomhetPublisher> {
 
-    protected VirksomhetSubscriber(WebClient webClient, AdapterProperties props, VirksomhetPublisher publisher, ValidatorService validatorService) {
-        super(webClient, props, publisher, validatorService);
-    }
+  protected VirksomhetSubscriber(
+      WebClient webClient,
+      AdapterProperties props,
+      VirksomhetPublisher publisher,
+      ValidatorService validatorService) {
+    super(webClient, props, publisher, validatorService);
+  }
 
-    @Override
-    protected AdapterCapability getCapability() {
-        return adapterProperties.getCapabilities().get("virksomhet");
-    }
+  @Override
+  protected AdapterCapability getCapability() {
+    return adapterProperties.getCapabilities().get("virksomhet");
+  }
 
-    @Override
-    protected SyncPageEntry createSyncPageEntry(VirksomhetResource resource) {
-        return SyncPageEntry.of(resource.getVirksomhetsId().getIdentifikatorverdi(), resource);
-    }
+  @Override
+  protected SyncPageEntry createSyncPageEntry(VirksomhetResource resource) {
+    return SyncPageEntry.of(resource.getVirksomhetsId().getIdentifikatorverdi(), resource);
+  }
 }
