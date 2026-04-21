@@ -1,6 +1,6 @@
 package no.fintlabs.model.larling;
 
-import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.novari.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.adapter.config.AdapterProperties;
 import no.fintlabs.adapter.datasync.ResourceSubscriber;
 import no.fintlabs.adapter.models.AdapterCapability;

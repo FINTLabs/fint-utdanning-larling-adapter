@@ -2,7 +2,7 @@ package no.fintlabs.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import no.fint.model.resource.utdanning.larling.LarlingResource;
+import no.novari.fint.model.resource.utdanning.larling.LarlingResource;
 import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.adapter.datasync.SyncData;

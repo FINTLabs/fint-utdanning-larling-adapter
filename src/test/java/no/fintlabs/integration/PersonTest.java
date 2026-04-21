@@ -1,6 +1,6 @@
 package no.fintlabs.integration;
 
-import no.fint.model.resource.felles.PersonResource;
+import no.novari.fint.model.resource.felles.PersonResource;
 import no.fintlabs.BaseIntegrationTest;
 import no.fintlabs.BaseTestConfiguration;
 import no.fintlabs.TimeConverter;

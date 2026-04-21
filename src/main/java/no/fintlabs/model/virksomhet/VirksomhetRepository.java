@@ -1,6 +1,6 @@
 package no.fintlabs.model.virksomhet;
 
-import no.fint.model.resource.felles.VirksomhetResource;
+import no.novari.fint.model.resource.felles.VirksomhetResource;
 import no.fintlabs.adapter.events.WriteableResourceRepository;
 import no.fintlabs.adapter.models.event.RequestFintEvent;
 import org.springframework.stereotype.Repository;
