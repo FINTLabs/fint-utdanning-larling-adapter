@@ -108,7 +108,7 @@ jobs:
 
       - name: Bake manifests with Kustomize
         id: bake
-        uses: azure/k8s-bake@v3
+        uses: azure/k8s-bake@v4
         with:
           renderEngine: 'kustomize'
           kustomizationPath: 'kustomize/overlays/${{ steps.environment.outputs.result }}/${{ matrix.org }}'
@@ -118,16 +118,16 @@ jobs:
         run: |
           echo "SECRET_NAME=$(echo AKS_${{ steps.environment.outputs.result }}_FINT_GITHUB | tr '[:lower:]' '[:upper:]')" >> $GITHUB_OUTPUT
 
-      - uses: azure/login@v2
+      - uses: azure/login@v3
         with:
           creds: ${{ secrets[ steps.secretname.outputs.SECRET_NAME ] }}
 
-      - uses: azure/use-kubelogin@v1.2
+      - uses: azure/use-kubelogin@v1.3
         with:
           kubelogin-version: 'v0.0.26'
 
       - name: Set the target cluster
-        uses: azure/aks-set-context@v4
+        uses: azure/aks-set-context@v5
         with:
           cluster-name: '${{ matrix.cluster }}'
           resource-group: '${{ steps.resource-group.outputs.result }}'
@@ -141,7 +141,7 @@ jobs:
           fi
 
       - name: Deploy
-        uses: azure/k8s-deploy@v5.0.3 # Because of bug in 5.0.4, we specify 5.0.3
+        uses: azure/k8s-deploy@v6
         with:
           action: deploy
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
