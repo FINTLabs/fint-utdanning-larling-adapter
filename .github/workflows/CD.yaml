@@ -141,7 +141,7 @@ jobs:
           fi
 
       - name: Deploy
-        uses: azure/k8s-deploy@v6
+        uses: azure/k8s-deploy@v5.0.3
         with:
           action: deploy
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
