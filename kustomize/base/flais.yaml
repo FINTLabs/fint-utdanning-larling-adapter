@@ -18,7 +18,7 @@ spec:
   image: ghcr.io/fintlabs/fint-utdanning-larling-adapter:sha-0000000
   env:
     - name: JAVA_TOOL_OPTIONS
-      value: '-XX:+ExitOnOutOfMemoryError -Xmx750M'
+      value: '-XX:+ExitOnOutOfMemoryError -Xmx1000M'
     - name: fint.fylkesnr
       value: nummer
     - name: fint.adapter.base-url
@@ -38,7 +38,7 @@ spec:
     itemPath: "vaults/aks-beta-vault/items/fint-utdanning-larling-adapter"
   resources:
     limits:
-      memory: "1Gi"
+      memory: "1250Mi"
       cpu: "250m"
     requests:
       memory: "750Mi"
