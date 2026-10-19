@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "/provider/utdanning/larling/larling/"
+    "url": "/provider/utdanning/larling/larling"
   },
   "response": {
     "status": 200,
